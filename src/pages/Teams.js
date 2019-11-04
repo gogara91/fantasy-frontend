@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import Team from '../components/teams/Team.js'
-
+import Http from '../services/HttpService.js'
 export default class Teams extends Component {
     state = {
         teams: [],
+        players: [],
+        users: [],
+        games: []
     }
     
-    componentDidMount() {
-
+    async componentDidMount() {
+        try {
+            let response = await Http.get('https://www.balldontlie.io/api/v1/teams'); 
+            this.setState({
+                ...this.state,
+                teams: response.data.data
+               
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 
     increaseNumberOfWins = (id) => {
@@ -29,15 +42,11 @@ export default class Teams extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
-            this.state.teams.map(team => {
-                return <Team 
-                    key={team.id} 
-                    team={team}
-                    increaseNumberOfWins={this.increaseNumberOfWins}
-                    deleteTeam={this.deleteTeam}
-                />
-            })
+                this.state.teams.map( team => {
+                    return <Team key={team.id} team={team} />
+                })
         )
     }
 }

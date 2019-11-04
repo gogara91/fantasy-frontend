@@ -16,8 +16,8 @@ export default class Register extends Component {
 
     handleSubmit = async () => {
         try {
-            const response = await AuthService.register(this.state.user);
-            console.log(response);
+            const { data } = await AuthService.register(this.state.user);
+            console.log(data);
         } catch(e) {
             console.log(e.request.response);
         }
@@ -86,9 +86,7 @@ export default class Register extends Component {
                                             className="form-control" 
                                             placeholder="Confirm Password *" 
                                             value={password_confirmation} 
-                                            onChange={(e) => {
-                                                this.handleChange(e)
-                                            }}
+                                            onChange={this.handleChange}
                                         />
                                     </div>
                                 </div>
