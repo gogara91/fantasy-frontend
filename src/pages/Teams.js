@@ -1,52 +1,39 @@
-import React, { Component } from 'react'
-import Team from '../components/teams/Team.js'
-import Http from '../services/HttpService.js'
-export default class Teams extends Component {
-    state = {
-        teams: [],
-        players: [],
-        users: [],
-        games: []
-    }
-    
-    async componentDidMount() {
-        try {
-            let response = await Http.get('https://www.balldontlie.io/api/v1/teams'); 
-            this.setState({
-                ...this.state,
-                teams: response.data.data
-               
-            })
-        }
-        catch(e) {
-            console.log(e)
-        }
-    }
+import React, { Component } from 'react';
+import Team from '../components/teams/Team.js';
+import {redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {fetchTeams} from '../redux/actions/teamsActions'
+import {TeamsStore} from "../redux/reducers/teamsReducer";
 
-    increaseNumberOfWins = (id) => {
-        this.setState({ 
-            teams: this.state.teams.map(team => {
-                if(team.id === id) {
-                    console.log(team);
-                    team.gamesWon++;
-                }
-                return team;
-            })
-        })
-    }
-
-    deleteTeam = (id) => {
-        this.setState({
-            teams: this.state.teams.filter(team => team.id !== id)
-        });
+class Teams extends Component {
+    componentDidMount() {
+        this.props.getTeams();
     }
 
     render() {
-        console.log(this.state)
+        let teams = <h1>No teams found...</h1>;
+        if(this.props.teams) {
+            teams = this.props.teams.map(team => <Team key={team.id} team={team}></Team>)
+        }
         return (
-                this.state.teams.map( team => {
-                    return <Team key={team.id} team={team} />
-                })
+            <>
+                {teams}
+            </>
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        teams: state.TeamsStore.teams
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTeams: () => dispatch(fetchTeams())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Teams);

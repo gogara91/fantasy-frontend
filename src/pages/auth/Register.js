@@ -1,25 +1,35 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import '../../css/Register.css';
-import AuthService from '../../services/AuthService.js';
-
+import InputError from '../../components/partials/InputError.js';
+import { Redirect } from 'react-router-dom';
 export default class Register extends Component {
 
     state = {
+        toLogin: false,
         user: {
             name: '',
             email: '',
             password: '',
             password_confirmation: '',
-
+        },
+        errors: {
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: ''
         }
     }
 
     handleSubmit = async () => {
         try {
-            const { data } = await AuthService.register(this.state.user);
-            console.log(data);
+            this.props.history.push('/login');
+
         } catch(e) {
-            console.log(e.request.response);
+            let response = JSON.parse(e.request.response);
+            this.setState({
+                errors: response.errors
+            });
+            console.log(this.state.errors);
         }
     }
 
@@ -34,8 +44,11 @@ export default class Register extends Component {
         })
     }
     render() {
+        if(this.state.toLogin) {
+            return <Redirect to='/login' />
+        }
         const {name, email, password, password_confirmation} = this.state.user;
-        
+        const {errors} = this.state;
         return (
             <div>
                 <div className="container register-form mt-3">
@@ -56,6 +69,7 @@ export default class Register extends Component {
                                             value={name} 
                                             onChange={this.handleChange}
                                         />
+                                        <InputError error={errors.name} />
                                     </div>
                                     <div className="form-group">
                                         <input 
@@ -66,6 +80,7 @@ export default class Register extends Component {
                                             value={email} 
                                             onChange={this.handleChange}
                                         />
+                                        <InputError error={errors.email} />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
@@ -78,6 +93,7 @@ export default class Register extends Component {
                                             value={password} 
                                             onChange={this.handleChange}
                                         />
+                                        <InputError error={errors.password} />
                                     </div>
                                     <div className="form-group">
                                         <input 
@@ -88,6 +104,7 @@ export default class Register extends Component {
                                             value={password_confirmation} 
                                             onChange={this.handleChange}
                                         />
+                                        <InputError error={errors.password_confirmation} />
                                     </div>
                                 </div>
                             </div>
