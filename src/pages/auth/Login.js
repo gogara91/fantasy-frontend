@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../../css/Login.css'
 import {connect} from 'react-redux';
-
+import {handleLogin} from '../../redux/actions/loginActions'
 class Login extends Component {
     state = {
         credentials: {
@@ -18,13 +18,6 @@ class Login extends Component {
                 [inputName]: e.target.value,
             }
         })
-    }
-
-    handleSubmit = async () => {
-        try {
-        } catch(e) {
-            console.log(e);
-        }
     }
 
     render() {
@@ -57,8 +50,8 @@ class Login extends Component {
                                 <div className="form-group">
                                     <button 
                                         type="button" 
-                                        className="btnSubmit" 
-                                        onClick={this.handleSubmit}
+                                        className="btnSubmit"
+                                        onClick={() => this.props.handleLoginAttempt(this.state.credentials)}
                                     >
                                         Submit
                                     </button>
@@ -74,5 +67,12 @@ class Login extends Component {
     }
 }
 
-
-export default connect()(Login);
+const mapDispatchToProps = dispatch => {
+    return {
+        handleLoginAttempt: (credentials) => {
+            console.log(credentials);
+            dispatch(handleLogin(credentials))
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(Login);

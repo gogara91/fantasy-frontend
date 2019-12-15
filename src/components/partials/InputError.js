@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-
-export default class InputError extends Component {
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+class InputError extends Component {
     render() {
         return (
             <>
@@ -9,3 +9,9 @@ export default class InputError extends Component {
         )
     }
 }
+
+InputError.propTypes = {
+    error: PropTypes.string
+};
+
+export default InputError;

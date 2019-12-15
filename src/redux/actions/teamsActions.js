@@ -1,10 +1,9 @@
 import TeamsService from "../../services/TeamsService";
-
-export const FETCH_TEAMS = 'FETCH_TEAMS';
+import * as actionTypes from './actionTypes';
 
 const fetchTeamsDispatcher = (data) => {
     return {
-            type: FETCH_TEAMS,
+            type: actionTypes.FETCH_TEAMS,
             payload: data
     }
 
@@ -19,5 +18,23 @@ export const fetchTeams = () => {
             console.log(e);
         }
 
+    }
+};
+
+const fetchTeamDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_TEAM,
+        payload: data
+    }
+};
+
+export const fetchTeam = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await TeamsService.team(id);
+            return dispatch(fetchTeamDispatcher(data))
+        } catch(e) {
+            console.log(e);
+        }
     }
 }

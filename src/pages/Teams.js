@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Team from '../components/teams/Team.js';
-import {redirect} from 'react-router-dom';
+import TeamRow from '../components/teams/TeamRow.js';
 import {connect} from 'react-redux';
 import {fetchTeams} from '../redux/actions/teamsActions'
-import {TeamsStore} from "../redux/reducers/teamsReducer";
+import PageTitle from "../components/partials/PageTitle";
 
 class Teams extends Component {
     componentDidMount() {
@@ -13,11 +12,23 @@ class Teams extends Component {
     render() {
         let teams = <h1>No teams found...</h1>;
         if(this.props.teams) {
-            teams = this.props.teams.map(team => <Team key={team.id} team={team}></Team>)
+            teams = this.props.teams.map(team => <TeamRow key={team.id} team={team}></TeamRow>)
         }
         return (
             <>
-                {teams}
+            <PageTitle title='Teams' />
+            <table className="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>Team</td>
+                        <td>city</td>
+                        <td>conference</td>
+                        <td>division</td>
+                        <td>name</td>
+                    </tr>
+                </thead>
+                <tbody>{teams}</tbody>
+            </table>
             </>
         )
     }

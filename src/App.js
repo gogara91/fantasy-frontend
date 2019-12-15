@@ -2,14 +2,14 @@ import React from 'react';
 import './css/App.css';
 import Router from './Router';
 import { Provider } from 'react-redux';
-import Posts from './pages/Posts.js';
+
 import store from './redux/store';
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Router>
-        </Router>
+          <Router>
+          </Router>
       </div>
     </Provider>
 

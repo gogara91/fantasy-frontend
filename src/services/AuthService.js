@@ -8,7 +8,8 @@ class AuthService {
         return Http.post('auth/login', data);
     }
     handleSuccessfulLogin(data) {
-        
+        console.log(data);
+        localStorage.setItem('auth_token', data.access_token)
     }
 }
 
