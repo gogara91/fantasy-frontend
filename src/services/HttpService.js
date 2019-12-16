@@ -28,6 +28,10 @@ class HttpService {
     delete(url) {
         return Http.delete(url);
     }
+
+    Axios() {
+        return Http;
+    }
 }
 
 export default new HttpService();

@@ -3,12 +3,15 @@ import Teams from './pages/Teams.js';
 import Players from './pages/Players.js'
 import Login from './pages/auth/Login.js'
 import Register from './pages/auth/Register.js'
+import Logout from './pages/auth/Logout';
 import Navbar from './components/partials/Navbar.js';
 import Team from './pages/Team';
+import {ProtectedRoute} from './components/ProtectedRoute'
+import {GuestRoute} from './components/GuestRoute'
 
 import {
   BrowserRouter as Router,
-  Route,
+  // Route,
 } from "react-router-dom";
 
 export default class Routing extends Component {
@@ -18,16 +21,16 @@ export default class Routing extends Component {
                 <div>
                     <Navbar></Navbar>
                     <div className='container mt-3'>
-                        <Route path='/players' component={Players}></Route>
-                        <Route path='/teams/:id' component={Team}></Route>
-                        <Route exact path='/teams' component={Teams}></Route>
-                        <Route path='/login' component={Login}></Route>
-                        <Route path='/register' component={Register}></Route>
+                        <ProtectedRoute path='/players' component={Players} ></ProtectedRoute>
+                        <ProtectedRoute path='/teams/:id' component={Team} ></ProtectedRoute>
+                        <ProtectedRoute exact path='/teams' component={Teams} ></ProtectedRoute>
+                        <ProtectedRoute exact path='/logout' component={Logout} ></ProtectedRoute>
+                        <GuestRoute path='/login' component={Login} ></GuestRoute>
+                        <GuestRoute path='/register' component={Register} ></GuestRoute>
                     </div>
 
                 </div>
             </Router>
-
         )
     }
 }

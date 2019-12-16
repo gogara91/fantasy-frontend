@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 class TeamRow extends Component {
     
    render() {
-       let {id, abbreviation, city, conference, division, full_name, name} = this.props.team;
+       let {id, city, conference, division, full_name, name} = this.props.team;
        return (
                <tr>
                    <td><Link to={'/teams/' + id}>{full_name}</Link></td>

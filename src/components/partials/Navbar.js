@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
+
+    links = [
+        { to: '/players', name: 'Players', type: 'auth'},
+        { to: '/teams', name: 'Teams', type: 'auth'},
+        { to: '/login', name: 'Login', type: 'guest'},
+        { to: '/register', name: 'Register', type: 'guest'},
+        { to: '/logout', name: 'Logout', type: 'auth'},
+    ];
+
     render() {
+        const links = this.links.map((link, index)  => {
+            if(this.props.isAuthenticated && link.type === 'auth') {
+                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+            }
+            if(!this.props.isAuthenticated && link.type === 'guest') {
+                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+            }
+            if(link.type === 'public') {
+                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+            }
+        })
         return (
             <div className='card'>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -12,18 +33,7 @@ export default class Navbar extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link className='nav-link' to='/players'>Players</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className='nav-link' to='/teams'>Teams</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className='nav-link' to='/login'>Login</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className='nav-link' to='/register'>Register</Link>
-                            </li>
+                            {links}
                         </ul>
                     </div>
                     </nav>
@@ -31,3 +41,8 @@ export default class Navbar extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {isAuthenticated: state.authStore.isAuthenticated}
+}
+export default connect(mapStateToProps)(Navbar);

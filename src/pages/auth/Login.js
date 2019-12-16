@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../../css/Login.css'
 import {connect} from 'react-redux';
-import {handleLogin} from '../../redux/actions/loginActions'
+import {handleLogin} from '../../redux/actions/authActions'
 class Login extends Component {
     state = {
         credentials: {
@@ -18,6 +18,11 @@ class Login extends Component {
                 [inputName]: e.target.value,
             }
         })
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.handleLoginAttempt(this.state.credentials);
     }
 
     render() {
@@ -27,38 +32,38 @@ class Login extends Component {
                     <div className="row">
                         <div className="col-md-6 login-form-2 offset-md-3">
                             <h3>Login</h3>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
-                                    <input 
-                                        type="email" 
+                                    <input
+                                        type="email"
                                         name='email'
-                                        className="form-control" 
-                                        placeholder="Your Email *" 
+                                        className="form-control"
+                                        placeholder="Your Email *"
                                         value={this.state.credentials.email}
                                         onChange={this.handleChange}
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <input 
-                                        type="password" 
+                                    <input
+                                        type="password"
                                         name='password'
-                                        className="form-control" 
-                                        placeholder="Your Password *" 
+                                        className="form-control"
+                                        placeholder="Your Password *"
                                         value={this.state.credentials.password}
                                         onChange={this.handleChange}
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <button 
-                                        type="button" 
+                                    <button
+                                        type="submit"
                                         className="btnSubmit"
-                                        onClick={() => this.props.handleLoginAttempt(this.state.credentials)}
                                     >
                                         Submit
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <a href="#" className="ForgetPwd" value="Login">Forget Password?</a>
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -70,7 +75,6 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         handleLoginAttempt: (credentials) => {
-            console.log(credentials);
             dispatch(handleLogin(credentials))
         }
     }

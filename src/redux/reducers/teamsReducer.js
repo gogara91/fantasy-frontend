@@ -1,4 +1,3 @@
-import * as teamActions from "../actions/teamsActions";
 import * as actionTypes from '../actions/actionTypes'
 const initialState = {
     teams: [],

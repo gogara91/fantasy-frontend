@@ -6,10 +6,12 @@ class Team extends Component {
 
     componentDidMount() {
         this.props.fetchTeam(this.props.match.params.id);
+        console.log('Players.js page')
+
     }
 
     render() {
-        let {id, abbreviation, city, conference, division, full_name, name} = this.props.team;
+        let {full_name} = this.props.team;
         return (
             <>
                 <PageTitle title={full_name}></PageTitle>

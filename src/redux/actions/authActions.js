@@ -19,3 +19,10 @@ export const handleLogin = (credentials) => {
         }
     }
 }
+
+export const handleLogout = () => {
+    authService.handleLogout();
+    return {
+        type: actionTypes.HANDLE_LOGOUT
+    }
+}
