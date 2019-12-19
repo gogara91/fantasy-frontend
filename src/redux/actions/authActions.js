@@ -1,22 +1,24 @@
 import authService from '../../services/AuthService';
 import * as actionTypes from './actionTypes';
 
-const handleLoginDispatcher = () => {
+const handleLoginDispatcher = (data) => {
     return {
         type: actionTypes.HANDLE_LOGIN_SUCCESS,
+        payload: data
     }
 };
 
 export const handleLogin = (credentials) => {
-    return async (dispatch) => {
-        try {
-            const { data } = await authService.attemptLogin(credentials)
-            authService.handleSuccessfulLogin(data)
-            dispatch(handleLoginDispatcher());
-        }
-        catch(e) {
-
-        }
+    return (dispatch) => {
+        authService.attemptLogin(credentials)
+            .then(function(response){
+                authService.setToken(response);
+                authService.getUserData()
+                    .then(function(response) {
+                        authService.setUser(response);
+                        dispatch(handleLoginDispatcher(response.data));
+                    })
+            });
     }
 }
 

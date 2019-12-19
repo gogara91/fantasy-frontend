@@ -7,8 +7,6 @@ import PageTitle from "../components/partials/PageTitle";
 class Teams extends Component {
     componentDidMount() {
         this.props.getTeams();
-        console.log('Teams.js page')
-
     }
 
     render() {

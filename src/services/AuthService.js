@@ -1,8 +1,11 @@
 import Http from './HttpService.js';
-import { HANDLE_LOGIN_SUCCESS } from '../redux/actions/actionTypes'
-import store from '../redux/store'
+import { HANDLE_LOGIN_SUCCESS } from '../redux/actions/actionTypes';
+import store from '../redux/store';
+import LocalStorageService from "./LocalStorageService";
 class AuthService {
     token = '';
+    user = {};
+
     constructor() {
         this.isAuthenticated();
         this.loginIfAuthenticated();
@@ -15,21 +18,31 @@ class AuthService {
     attemptLogin(data) {
         return Http.post('auth/login', data);
     }
+    getUserData() {
+        return Http.post('auth/me ');
+    }
 
-    handleSuccessfulLogin(data) {
-        localStorage.setItem('auth_token', data.access_token)
+    setToken(tokenData) {
+        LocalStorageService.setItem('auth_token', tokenData.data.access_token);
+        Http.Axios().defaults.headers.common['Authorization'] = `Bearer ${tokenData.data.access_token}`
+    }
+
+    setUser(userData) {
+        LocalStorageService.setItem('user', JSON.stringify(userData.data));
     }
 
     handleLogout() {
-        localStorage.removeItem('auth_token');
+        LocalStorageService.clearAuthStorage();
     }
 
     isAuthenticated() {
         const token = localStorage.getItem('auth_token');
-        if(!token) {
+        const user = localStorage.getItem('user');
+        if(!token || !user) {
             return false;
         }
         this.token = token;
+        this.user = JSON.parse(user);
         return true;
     }
 
@@ -37,9 +50,8 @@ class AuthService {
         if(!this.token) {
             return;
         }
-        store.dispatch({ type: HANDLE_LOGIN_SUCCESS })
-        Http.Axios().defaults.headers.common['Authorization'] = `Bearer ${this.token}`
-
+        store.dispatch({ type: HANDLE_LOGIN_SUCCESS, payload: this.user });
+        Http.Axios().defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
     }
 }
 

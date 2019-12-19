@@ -6,43 +6,68 @@ class Navbar extends Component {
 
     links = [
         { to: '/players', name: 'Players', type: 'auth'},
-        { to: '/teams', name: 'Teams', type: 'auth'},
+        { to: '/teams', name: 'Teams', type: 'auth'}
+    ];
+
+    authLinks = [
         { to: '/login', name: 'Login', type: 'guest'},
         { to: '/register', name: 'Register', type: 'guest'},
         { to: '/logout', name: 'Logout', type: 'auth'},
-    ];
-
+    ]
     render() {
         const links = this.links.map((link, index)  => {
             if(this.props.isAuthenticated && link.type === 'auth') {
-                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(!this.props.isAuthenticated && link.type === 'guest') {
-                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(link.type === 'public') {
-                return <Link key={index} className='nav-link' to={link.to}>{link.name}</Link>
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
-        })
-        return (
-            <div className='card'>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
+        });
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                            {links}
-                        </ul>
+        const authLinks = this.authLinks.map((link, index)  => {
+            if(this.props.isAuthenticated && link.type === 'auth') {
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+            }
+            if(!this.props.isAuthenticated && link.type === 'guest') {
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+            }
+            if(link.type === 'public') {
+                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+            }
+        });
+        return (
+            <div className='col-md-12'>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <div className='container'>
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div className="collapse navbar-collapse row" id="navbarSupportedContent">
+                            <ul className="navbar-nav mr-auto col-sm-6">
+                                {links}
+                            </ul>
+                            <ul className="align-content-lg-end navbar-nav">
+                                {authLinks}
+                            </ul>
+
+                        </div>
+
                     </div>
-                    </nav>
+                </nav>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {isAuthenticated: state.authStore.isAuthenticated}
+    return {
+        isAuthenticated: state.authStore.isAuthenticated,
+        user: state.authStore.user
+
+    }
 }
 export default connect(mapStateToProps)(Navbar);

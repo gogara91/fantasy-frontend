@@ -6,8 +6,6 @@ class Team extends Component {
 
     componentDidMount() {
         this.props.fetchTeam(this.props.match.params.id);
-        console.log('Players.js page')
-
     }
 
     render() {
