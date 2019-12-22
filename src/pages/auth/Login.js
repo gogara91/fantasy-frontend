@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import '../../css/Login.css'
 import {connect} from 'react-redux';
 import {handleLogin} from '../../redux/actions/authActions'
+import InputError from "../../components/partials/InputError";
 class Login extends Component {
     state = {
         credentials: {
             email: '',
             password: ''
-        }
+        },
+        error: [''],
     }
 
     handleChange = (e) => {
@@ -20,9 +22,16 @@ class Login extends Component {
         })
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        this.props.handleLoginAttempt(this.state.credentials);
+        try {
+            await this.props.handleLoginAttempt(this.state.credentials);
+        } catch (err) {
+            this.setState({
+                ...this.state,
+                error: ['Invalid credentials! Please check your email and password.']
+            })
+        }
     }
 
     render() {
@@ -52,6 +61,7 @@ class Login extends Component {
                                         value={this.state.credentials.password}
                                         onChange={this.handleChange}
                                     />
+                                    <InputError error={this.state.error}></InputError>
                                 </div>
                                 <div className="form-group">
                                     <button
@@ -74,9 +84,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleLoginAttempt: (credentials) => {
-            dispatch(handleLogin(credentials))
-        }
+        handleLoginAttempt: (credentials) =>  dispatch(handleLogin(credentials))
     }
 };
 

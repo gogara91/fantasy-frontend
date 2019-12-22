@@ -23,8 +23,11 @@ class AuthService {
     }
 
     setToken(tokenData) {
-        LocalStorageService.setItem('auth_token', tokenData.data.access_token);
-        Http.Axios().defaults.headers.common['Authorization'] = `Bearer ${tokenData.data.access_token}`
+        return new Promise((resolve, reject) => {
+            LocalStorageService.setItem('auth_token', tokenData.data.access_token);
+            Http.Axios().defaults.headers.common['Authorization'] = `Bearer ${tokenData.data.access_token}`
+            resolve();
+        })
     }
 
     setUser(userData) {

@@ -4,14 +4,10 @@ class InputError extends Component {
     render() {
         return (
             <>
-                <p className='text-danger'>{this.props.error}</p>
+                <p className='text-danger mt-1 mb-1'>{this.props.error[0]}</p>
             </>
         )
     }
 }
-
-InputError.propTypes = {
-    error: PropTypes.string
-};
 
 export default InputError;

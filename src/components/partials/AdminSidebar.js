@@ -1,5 +1,4 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 export default (props) => {
@@ -21,7 +20,7 @@ export default (props) => {
         <div className="col-md-2">
             <div id="sidebar">
                 <header>
-                    <Link to='/admin'>Fantasy</Link>
+                    <Link to='/dashboard'>Fantasy</Link>
                 </header>
                 <ul className="nav">
                     {routes}

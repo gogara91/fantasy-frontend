@@ -17,25 +17,25 @@ class Navbar extends Component {
     render() {
         const links = this.links.map((link, index)  => {
             if(this.props.isAuthenticated && link.type === 'auth') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(!this.props.isAuthenticated && link.type === 'guest') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(link.type === 'public') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
             }
         });
 
         const authLinks = this.authLinks.map((link, index)  => {
             if(this.props.isAuthenticated && link.type === 'auth') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(!this.props.isAuthenticated && link.type === 'guest') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link className='nav-link' to={link.to}>{link.name}</Link></li>
             }
             if(link.type === 'public') {
-                return <li><Link key={index} className='nav-link' to={link.to}>{link.name}</Link></li>
+                return <li key={index}><Link className='nav-link' to={link.to}>{link.name}</Link></li>
             }
         });
         return (

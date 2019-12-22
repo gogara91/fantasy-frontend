@@ -20,19 +20,23 @@ import {Row} from 'react-bootstrap'
 
 class Routing extends Component {
     render() {
+        const adminRoutes =  !this.props.isAdmin ? '' :
+            <AdminContent>
+                <AdminRoute exact path='/admin/dashboard' component={AdminPanel} />
+                <AdminRoute exact path='/admin/teams' component={Teams} />
+                <AdminRoute exact path='/teams/:id' component={Team}  />
+
+            </AdminContent>
+
         return (
             <Router>
                 <Row noGutters={true}>
                     { this.props.isAdmin ? <AdminSidebar></AdminSidebar> : <Navbar></Navbar> }
                     <ProtectedRoute path='/players' component={Players}  />
-                    <ProtectedRoute path='/teams/:id' component={Team}  />
-                    <ProtectedRoute exact path='/teams' component={Teams}  />
                     <ProtectedRoute exact path='/logout' component={Logout}  />
                     <GuestRoute path='/login' component={Login}  />
                     <GuestRoute path='/register' component={Register}  />
-                    <AdminContent>
-                        <AdminRoute exact path='/admin' component={AdminPanel} />
-                    </AdminContent>
+                    {adminRoutes}
                 </Row>
             </Router>
         )

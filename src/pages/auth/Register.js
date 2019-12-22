@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import '../../css/Register.css';
 import InputError from '../../components/partials/InputError.js';
 import { Redirect } from 'react-router-dom';
-export default class Register extends Component {
+import { connect } from 'react-redux';
+import {handleRegister} from "../../redux/actions/authActions";
+
+class Register extends Component {
 
     state = {
         toLogin: false,
@@ -22,14 +25,14 @@ export default class Register extends Component {
 
     handleSubmit = async () => {
         try {
-            this.props.history.push('/login');
-
+            await this.props.attemptRegister(this.state.user);
         } catch(e) {
-            let response = JSON.parse(e.request.response);
             this.setState({
-                errors: response.errors
-            });
-            console.log(this.state.errors);
+                ...this.state,
+                errors: {
+                    ...e.errors
+                }
+            })
         }
     }
 
@@ -50,7 +53,7 @@ export default class Register extends Component {
         const {name, email, password, password_confirmation} = this.state.user;
         const {errors} = this.state;
         return (
-            <div>
+            <>
                 <div className="container register-form mt-3">
                     <div className="form">
                         <div className="note">
@@ -112,7 +115,15 @@ export default class Register extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        attemptRegister: (user) => dispatch(handleRegister(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Register);

@@ -48,7 +48,7 @@ class HttpService {
                 store.dispatch({type: HANDLE_LOGOUT});
                 LocalStorageService.clearAuthStorage();
             }
-            return error;
+            return Promise.reject(error);
         });
     }
 }
