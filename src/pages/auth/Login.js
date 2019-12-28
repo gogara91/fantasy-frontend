@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import '../../css/Login.css'
-import {connect} from 'react-redux';
-import {handleLogin} from '../../redux/actions/authActions'
-import InputError from "../../components/partials/InputError";
+import { connect } from 'react-redux';
+import {handleLogin } from '../../redux/actions/authActions'
+import InputError from '../../components/partials/InputError';
+import { SuccessMessage } from '../../components/partials/SuccessMessage';
 class Login extends Component {
     state = {
         credentials: {
@@ -35,9 +36,16 @@ class Login extends Component {
     }
 
     render() {
+        console.log(!!this.props.location.state);
         return (
             <>
                 <div className="container login-container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            {this.props.location.state ?
+                                <SuccessMessage message={this.props.location.state.message}></SuccessMessage> : ''}
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-md-6 login-form-2 offset-md-3">
                             <h3>Login</h3>

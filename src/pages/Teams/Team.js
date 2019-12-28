@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTeam } from "../redux/actions/teamsActions";
-import PageTitle from "../components/partials/PageTitle";
+import { fetchTeam } from "../../redux/actions/teamsActions";
+import PageTitle from "../../components/partials/PageTitle";
 class Team extends Component {
 
     componentDidMount() {

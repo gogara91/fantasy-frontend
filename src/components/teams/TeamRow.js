@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPen} from "@fortawesome/free-solid-svg-icons";
 
 class TeamRow extends Component {
     
@@ -13,6 +15,14 @@ class TeamRow extends Component {
                    <td>{conference}</td>
                    <td>{division}</td>
                    <td>{name}</td>
+                   <td className="text-center">
+                       <Link
+                           to={`/teams/${id}/edit`}
+                            className="btn btn-sm btn-outline-primary"
+                       >
+                           <FontAwesomeIcon icon={faPen}/>
+                       </Link>
+                   </td>
                </tr>
        )
    }

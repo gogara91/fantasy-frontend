@@ -20,18 +20,31 @@ class Register extends Component {
             email: '',
             password: '',
             password_confirmation: ''
-        }
+        },
+        buttonText: 'Submit',
+        buttonDisabled: false
     }
 
     handleSubmit = async () => {
+        this.setState({
+            ...this.state,
+            buttonText: 'Please wait...',
+            buttonDisabled: true
+        });
         try {
             await this.props.attemptRegister(this.state.user);
+            this.setState({
+                ...this.state,
+                toLogin: true
+            });
         } catch(e) {
             this.setState({
                 ...this.state,
                 errors: {
-                    ...e.errors
-                }
+                    ...e.errors,
+                },
+                buttonText: 'Submit',
+                buttonDisabled: false
             })
         }
     }
@@ -48,7 +61,10 @@ class Register extends Component {
     }
     render() {
         if(this.state.toLogin) {
-            return <Redirect to='/login' />
+            return <Redirect to={{
+                pathname: '/login',
+                state: { message: 'Successfully registered! You can login now.' }
+            }} />
         }
         const {name, email, password, password_confirmation} = this.state.user;
         const {errors} = this.state;
@@ -111,7 +127,12 @@ class Register extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" className="btnSubmit" onClick={this.handleSubmit}>Submit</button>
+                            <button
+                                type="button"
+                                className="btnSubmit"
+                                onClick={this.handleSubmit}
+                                disabled={this.state.buttonDisabled}
+                            >{this.state.buttonText}</button>
                         </div>
                     </div>
                 </div>

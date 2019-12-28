@@ -38,3 +38,21 @@ export const fetchTeam = (id) => {
         }
     }
 }
+
+const updateTeamDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_TEAM,
+        payload: data
+    }
+};
+
+export const updateTeam = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await TeamsService.team(id);
+            return dispatch(fetchTeamDispatcher(data))
+        } catch(e) {
+            console.log(e);
+        }
+    }
+}

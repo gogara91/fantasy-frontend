@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TeamRow from '../components/teams/TeamRow.js';
+import TeamRow from '../../components/teams/TeamRow.js';
 import {connect} from 'react-redux';
-import {fetchTeams} from '../redux/actions/teamsActions'
-import PageTitle from "../components/partials/PageTitle";
+import {fetchTeams} from '../../redux/actions/teamsActions'
+import PageTitle from "../../components/partials/PageTitle";
 
 class Teams extends Component {
     componentDidMount() {
@@ -17,14 +17,15 @@ class Teams extends Component {
         return (
             <>
             <PageTitle title='Teams' />
-            <table className="table table-striped table-bordered">
+            <table className="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <td>Team</td>
-                        <td>city</td>
-                        <td>conference</td>
-                        <td>division</td>
-                        <td>name</td>
+                        <td>City</td>
+                        <td>Conference</td>
+                        <td>Division</td>
+                        <td>Name</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>{teams}</tbody>
