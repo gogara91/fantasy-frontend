@@ -11,6 +11,7 @@ const FormGroup = (props) => {
         <div className={formGroupClassNames}>
             { props.label ? <label>{props.label}</label> : '' }
             <input
+                name={props.input.name}
                 type={props.input.type}
                 className={inputClassNames}
                 value={ props.input.value ? props.input.value : '' }

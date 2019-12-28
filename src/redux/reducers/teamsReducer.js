@@ -16,7 +16,15 @@ export const TeamsStore = (state = initialState, action) => {
                 ...state,
                 team: {...action.payload}
             }
-
+        case actionTypes.UPDATE_TEAM:
+            console.log('123123123', action.payload)
+            return {
+                ...state,
+                team: {
+                    ...state.team,
+                    ...action.payload
+                }
+            }
         default: return state;
     }
 };

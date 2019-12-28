@@ -8,6 +8,10 @@ class TeamsService {
     team(id) {
         return Http.get('teams/' + id);
     }
+
+    update(id, payload) {
+        return Http.put('/teams/' + id, payload);
+    }
 }
 
 export default new TeamsService();

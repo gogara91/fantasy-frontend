@@ -4,7 +4,9 @@ class InputError extends Component {
     render() {
         return (
             <>
-                <p className='text-danger mt-1 mb-1'>{this.props.error[0]}</p>
+                <p className='text-danger mt-1 mb-1'>
+                    {this.props.error ? this.props.error[0] : ''}
+                </p>
             </>
         )
     }

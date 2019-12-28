@@ -1,4 +1,5 @@
 export const FETCH_TEAMS = 'FETCH_TEAMS';
 export const FETCH_TEAM = 'FETCH_TEAM';
+export const UPDATE_TEAM = 'UPDATE_TEAM';
 export const HANDLE_LOGIN_SUCCESS = 'HANDLE_LOGIN_SUCCESS';
 export const HANDLE_LOGOUT = 'HANDLE_LOGOUT';
