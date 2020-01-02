@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchTeam, updateTeam } from "../../redux/actions/teamsActions";
+import { fetchTeam, updateTeam, saveTeam } from "../../redux/actions/teamsActions";
 import FormGroup from "../../components/pageBuilder/FormGroup";
 import PrimaryButton from "../../components/pageBuilder/PrimaryButton";
 class EditTeam extends Component {
@@ -10,9 +10,6 @@ class EditTeam extends Component {
     }
 
     handleInputChange = (e) => {
-        console.log({
-            [e.target.name]: e.target.value
-        })
         this.props.updateTeam(
             this.props.match.params.id,
             {
@@ -22,8 +19,7 @@ class EditTeam extends Component {
     };
 
     handleClick = () => {
-        //this has to dispatch TeamsService.update
-        //this has to dispatch TeamsService.update
+        this.props.saveTeam(this.props.match.params.id, this.props.team);
     }
 
     render() {
@@ -79,7 +75,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchTeam: (teamId) => dispatch(fetchTeam(teamId)),
-        updateTeam: (teamId, payload) => dispatch(updateTeam(teamId,payload))
+        updateTeam: (teamId, payload) => dispatch(updateTeam(teamId, payload)),
+        saveTeam: (teamId, payload) => dispatch(saveTeam(teamId, payload))
     }
 };
 

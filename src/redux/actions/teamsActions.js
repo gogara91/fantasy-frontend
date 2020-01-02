@@ -17,7 +17,6 @@ export const fetchTeams = () => {
         } catch(e) {
             console.log(e);
         }
-
     }
 };
 
@@ -39,11 +38,19 @@ export const fetchTeam = (id) => {
     }
 }
 
-
 export const updateTeam = (id, payload) => {
-    console.log(payload);
     return {
         type: actionTypes.UPDATE_TEAM,
         payload
+    }
+}
+
+export const saveTeam = (id, payload) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await TeamsService.update(id, payload)
+        } catch(e) {
+            console.log(e);
+        }
     }
 }
