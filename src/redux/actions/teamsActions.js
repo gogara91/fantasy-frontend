@@ -56,3 +56,20 @@ export const updateTeam = (id) => {
         }
     }
 }
+
+const fetchTeamGamesDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_TEAM_GAMES,
+        payload: data
+    }
+}
+export const fetchTeamGames = (teamId) => {
+    return async(dispatch) => {
+        try {
+            const { data } = await TeamsService.teamGames(teamId);
+            return dispatch(fetchTeamGamesDispatcher(data));
+        } catch(e) {
+            console.log(e);
+        }
+    }
+}

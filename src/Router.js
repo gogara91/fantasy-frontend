@@ -26,6 +26,7 @@ class Routing extends Component {
                 <AdminRoute exact path='/admin/dashboard' component={AdminPanel} />
                 <AdminRoute exact path='/admin/teams' component={Teams} />
                 <AdminRoute exact path='/teams/:id' component={Team}  />
+                <AdminRoute exact path='/teams/:id/games' component={Team} />
                 <AdminRoute exact path='/teams/:id/edit' component={EditTeam}  />
 
             </AdminContent>

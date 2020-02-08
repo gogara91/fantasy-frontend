@@ -8,6 +8,9 @@ class TeamsService {
     team(id) {
         return Http.get('teams/' + id);
     }
+    teamGames(teamId) {
+        return Http.get('teams/games/' + teamId)
+    }
 }
 
 export default new TeamsService();
