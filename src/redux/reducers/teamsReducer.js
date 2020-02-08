@@ -22,7 +22,14 @@ export const TeamsStore = (state = initialState, action) => {
                 ...state,
                 teamGames: [...action.payload]
             }
-
+        case actionTypes.UPDATE_TEAM:
+            return {
+                ...state,
+                team: {
+                    ...state.team,
+                    ...action.payload
+                }
+            }
         default: return state;
     }
 };
