@@ -36,14 +36,14 @@ export const fetchTeam = (id) => {
             console.log(e);
         }
     }
-}
+};
 
 export const updateTeam = (id, payload) => {
     return {
         type: actionTypes.UPDATE_TEAM,
         payload
     }
-}
+};
 
 export const saveTeam = (id, payload) => {
     return async (dispatch) => {
@@ -53,14 +53,15 @@ export const saveTeam = (id, payload) => {
             console.log(e);
         }
     }
-}
+};
 
 const fetchTeamGamesDispatcher = (data) => {
     return {
         type: actionTypes.FETCH_TEAM_GAMES,
         payload: data
     }
-}
+};
+
 export const fetchTeamGames = (teamId) => {
     return async(dispatch) => {
         try {
@@ -70,4 +71,23 @@ export const fetchTeamGames = (teamId) => {
             console.log(e);
         }
     }
+};
+
+const fetchTeamScoresDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_TEAM_GAMES,
+        payload: data
+    }
+};
+
+export const fetchTeamScores = (teamId) => {
+    return async(dispatch) => {
+        try {
+            const { data } = await TeamsService.teamScores(teamId);
+            return dispatch(fetchTeamScoresDispatcher(data));
+        } catch(e) {
+            console.log(e);
+        }
+    }
 }
+

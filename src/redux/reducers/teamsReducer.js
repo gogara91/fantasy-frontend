@@ -3,6 +3,7 @@ const initialState = {
     teams: [],
     team: {},
     teamGames: [],
+    teamGamesWithScores: []
 };
 
 export const TeamsStore = (state = initialState, action) => {
@@ -29,6 +30,12 @@ export const TeamsStore = (state = initialState, action) => {
                     ...state.team,
                     ...action.payload
                 }
+            };
+
+        case actionTypes.FETCH_TEAM_SCORES:
+            return {
+                ...state,
+                teamGames: [...action.payload]
             }
         default: return state;
     }
