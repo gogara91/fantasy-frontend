@@ -1,5 +1,6 @@
 import TeamsService from "../../services/TeamsService";
 import * as actionTypes from './actionTypes';
+import {showErrorModal} from "./errorActions";
 
 const fetchTeamsDispatcher = (data) => {
     return {
@@ -15,7 +16,11 @@ export const fetchTeams = () => {
             const { data } = await TeamsService.allTeams();
             return dispatch(fetchTeamsDispatcher(data));
         } catch(e) {
-            console.log(e);
+            return dispatch(showErrorModal({
+                title: 'No teams found',
+                text: 'No teams found',
+                type: actionTypes.ERROR_DANGER
+            }))
         }
     }
 };
@@ -33,7 +38,11 @@ export const fetchTeam = (id) => {
             const { data } = await TeamsService.team(id);
             return dispatch(fetchTeamDispatcher(data))
         } catch(e) {
-            console.log(e);
+            return dispatch(showErrorModal({
+                title: 'Team Not Found',
+                text: 'Team Not Found',
+                type: actionTypes.ERROR_DANGER
+            }))
         }
     }
 };
@@ -48,9 +57,20 @@ export const updateTeam = (id, payload) => {
 export const saveTeam = (id, payload) => {
     return async (dispatch) => {
         try {
-            const { data } = await TeamsService.update(id, payload)
+            await TeamsService.update(id, payload);
+
+            return dispatch(showErrorModal({
+                title: 'Success',
+                text: 'Team is successfully saved!',
+                type: actionTypes.ERROR_SUCCESS
+            }))
+
         } catch(e) {
-            console.log(e);
+            return dispatch(showErrorModal({
+                title: 'Not saved',
+                text: 'Couldnt save team!',
+                type: actionTypes.ERROR_DANGER
+            }))
         }
     }
 };
@@ -68,7 +88,11 @@ export const fetchTeamGames = (teamId) => {
             const { data } = await TeamsService.teamGames(teamId);
             return dispatch(fetchTeamGamesDispatcher(data));
         } catch(e) {
-            console.log(e);
+            return dispatch(showErrorModal({
+                title: 'Error!',
+                text: 'Something went wrong!',
+                type: actionTypes.ERROR_DANGER
+            }))
         }
     }
 };
@@ -86,8 +110,12 @@ export const fetchTeamScores = (teamId) => {
             const { data } = await TeamsService.teamScores(teamId);
             return dispatch(fetchTeamScoresDispatcher(data));
         } catch(e) {
-            console.log(e);
+            return dispatch(showErrorModal({
+                title: 'Ooops!',
+                text: 'Something went wrong!',
+                type: actionTypes.ERROR_DANGER
+            }))
         }
     }
-}
+};
 

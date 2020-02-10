@@ -22,7 +22,7 @@ export const TeamsStore = (state = initialState, action) => {
             return {
                 ...state,
                 teamGames: [...action.payload]
-            }
+            };
         case actionTypes.UPDATE_TEAM:
             return {
                 ...state,
@@ -31,12 +31,11 @@ export const TeamsStore = (state = initialState, action) => {
                     ...action.payload
                 }
             };
-
         case actionTypes.FETCH_TEAM_SCORES:
             return {
                 ...state,
                 teamGames: [...action.payload]
-            }
+            };
         default: return state;
     }
 };

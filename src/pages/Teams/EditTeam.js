@@ -10,16 +10,27 @@ class EditTeam extends Component {
     }
 
     handleInputChange = (e) => {
-        this.props.updateTeam(
-            this.props.match.params.id,
-            {
-                [e.target.name]: e.target.value
-            }
-        );
+        try {
+            this.props.updateTeam(
+                this.props.match.params.id,
+                {
+                    [e.target.name]: e.target.value
+                }
+            );
+        } catch(error) {
+            console.log(error);
+        }
+
     };
 
     handleClick = () => {
-        this.props.saveTeam(this.props.match.params.id, this.props.team);
+        try {
+            this.props.saveTeam(this.props.match.params.id, this.props.team);
+            console.log(123);
+        } catch(e) {
+            console.log(e);
+
+        }
     }
 
     render() {
