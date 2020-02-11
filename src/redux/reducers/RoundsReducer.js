@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export const RoundsStore = (state = initialState, action) => {
-    console.log(action);
     switch(action.type) {
         case actionTypes.FETCH_ROUNDS:
             return {
