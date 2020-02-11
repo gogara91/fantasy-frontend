@@ -6,7 +6,7 @@ const initialState = {
     user: {},
 };
 
-export const authStore = (state= initialState, action) => {
+export const AuthStore = (state= initialState, action) => {
     switch(action.type) {
         case actionTypes.HANDLE_LOGIN_SUCCESS:
             return {

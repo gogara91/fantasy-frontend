@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 export const AdminRoute = ({component: Component, ...rest}) => {
 
-    const userLevel = useSelector(state => state.authStore.user.user_level);
+    const userLevel = useSelector(state => state.AuthStore.user.user_level);
 
     return(
         <Route

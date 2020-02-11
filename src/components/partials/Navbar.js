@@ -65,8 +65,8 @@ class Navbar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.authStore.isAuthenticated,
-        user: state.authStore.user
+        isAuthenticated: state.AuthStore.isAuthenticated,
+        user: state.AuthStore.user
 
     }
 }

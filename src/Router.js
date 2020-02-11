@@ -4,6 +4,7 @@ import {ProtectedRoute} from './components/ProtectedRoute'
 import {GuestRoute} from './components/GuestRoute'
 import {AdminRoute} from './components/AdminRoute'
 
+import Games from './pages/Games/Games';
 import Teams from './pages/Teams/Teams';
 import Players from './pages/Players'
 import Login from './pages/auth/Login'
@@ -25,6 +26,7 @@ class Routing extends Component {
             <AdminContent>
                 <AdminRoute exact path='/admin/dashboard' component={AdminPanel} />
                 <AdminRoute exact path='/admin/teams' component={Teams} />
+                <AdminRoute exact path='/admin/games' component={Games} />
                 <AdminRoute exact path='/teams/:id' component={Team}  />
                 <AdminRoute exact path='/teams/:id/games' component={Team} />
                 <AdminRoute exact path='/teams/:id/scores' component={Team} />
@@ -48,7 +50,7 @@ class Routing extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAdmin: state.authStore.isAdmin
+        isAdmin: state.AuthStore.isAdmin
     }
 }
 

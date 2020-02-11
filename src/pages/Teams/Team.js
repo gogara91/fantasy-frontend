@@ -45,11 +45,10 @@ class Team extends Component {
 }
 
 const mapStateToProps = state => {
-    return(
-        {
+    return {
             team: state.TeamsStore.team,
         }
-    )
+
 };
 
 const mapDispatchToProps = dispatch => {

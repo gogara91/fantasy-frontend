@@ -7,7 +7,7 @@ const initialState = {
     modalVisible: false
 };
 
-export const errorStore = (state = initialState, action) => {
+export const ErrorStore = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.SET_ERROR:
             return {

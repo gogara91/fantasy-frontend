@@ -5,7 +5,7 @@ export default (props) => {
 
     const links = [
         { to: '/admin/teams', name: 'Teams', type: 'Teams'},
-
+        { to: '/admin/games', name: 'Games', type:  'Games'},
     ];
 
     const routes = links.map((link, index) => {
