@@ -40,7 +40,7 @@ class Team extends Component {
                     </Route>
                 </Switch>
             </>
-    )
+        )
     }
 }
 

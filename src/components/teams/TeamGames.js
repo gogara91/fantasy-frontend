@@ -24,11 +24,13 @@ export default (props) => {
             <h3>Games</h3>
             <table className="table table-striped table-bordered">
                 <thead>
-                    <th>Round</th>
-                    <th>Home team</th>
-                    <th>Away team</th>
-                    <th>Score</th>
-                    <th>Time</th>
+                    <tr>
+                        <th>Round</th>
+                        <th>Home team</th>
+                        <th>Away team</th>
+                        <th>Score</th>
+                        <th>Time</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {gamesList}
