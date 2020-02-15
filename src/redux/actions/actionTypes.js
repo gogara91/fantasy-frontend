@@ -19,4 +19,6 @@ export const UPDATE_TEAM = 'UPDATE_TEAM';
 
 // Games
 export const FETCH_GAMES = 'FETCH_GAMES'
+export const FETCH_GAME = 'FETCH_GAME'
 export const FETCH_ROUNDS = 'FETCH_ROUNDS'
+export const START_GAME = 'FETCH_ROUNDS'

@@ -6,19 +6,20 @@ import {AdminRoute} from './components/AdminRoute'
 
 import Games from './pages/Games/Games';
 import Teams from './pages/Teams/Teams';
-import Players from './pages/Players'
-import Login from './pages/auth/Login'
-import Register from './pages/auth/Register'
+import Team from './pages/Teams/Team';
+import EditTeam from './pages/Teams/EditTeam';
+import StartGamePanel from './pages/Games/StartGamePanel'
+import Players from './pages/Players';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import Logout from './pages/auth/Logout';
 import Navbar from './components/partials/Navbar';
 import AdminSidebar from './components/partials/AdminSidebar';
-import Team from './pages/Teams/Team';
-import EditTeam from './pages/Teams/EditTeam';
-import AdminPanel from './pages/AdminPanel'
-import AdminContent from './components/partials/AdminContent'
+import AdminPanel from './pages/AdminPanel';
+import AdminContent from './components/partials/AdminContent';
 import {BrowserRouter as Router} from "react-router-dom";
 import {connect} from 'react-redux';
-import {Row} from 'react-bootstrap'
+import {Row} from 'react-bootstrap';
 
 class Routing extends Component {
     render() {
@@ -31,7 +32,8 @@ class Routing extends Component {
                 <AdminRoute exact path='/teams/:id/games' component={Team} />
                 <AdminRoute exact path='/teams/:id/scores' component={Team} />
                 <AdminRoute exact path='/teams/:id/edit' component={EditTeam}  />
-            </AdminContent>
+                <AdminRoute exact path='/Games/:id/start-game' component={StartGamePanel}  />
+            </AdminContent>;
 
         return (
             <Router>

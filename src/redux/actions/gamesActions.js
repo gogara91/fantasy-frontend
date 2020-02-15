@@ -24,5 +24,49 @@ export const fetchGames = () => {
     }
 };
 
+const handleGameStartDispatcher = (data) => {
+    return {
+        type: actionTypes.START_GAME,
+        payload: data,
+    }
+};
+
+export const handleGameStart = (gameId) => {
+    return async dispatch => {
+        try {
+            const { data } = await GamesService.startGame(gameId);
+        } catch(e) {
+            return dispatch(showErrorModal({
+                title: 'Error!',
+                text: 'Game not found!',
+                type: actionTypes.ERROR_DANGER
+            }));
+        }
+    }
+};
+
+
+const fetchGameDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_GAME,
+        payload: data,
+    }
+};
+
+export const fetchGame = (gameId) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await GamesService.fetchGame(gameId);
+            return dispatch(fetchGameDispatcher(data))
+        } catch (e) {
+            return dispatch(showErrorModal({
+                title: 'Error!',
+                text: 'Game not found!',
+                type: actionTypes.ERROR_DANGER
+            }));
+        }
+
+    }
+};
 
 

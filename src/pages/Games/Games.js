@@ -65,7 +65,7 @@ class Games extends Component {
 
         const gameRows = this.state.visibleGames.map(game => {
             return (
-                <GameRow game={game} key={game.id}></GameRow>
+                <GameRow game={game} key={game.id} startGameButton={true}></GameRow>
             )
         });
 
@@ -95,7 +95,7 @@ class Games extends Component {
                 </div>
                 {this.state.showGames ?
                 <div className="row">
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                         <table className="table table-striped table-bordered mt-3">
                             <thead>
                                 <tr>
@@ -104,6 +104,7 @@ class Games extends Component {
                                     <th>Away team</th>
                                     <th>Score</th>
                                     <th>Time</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

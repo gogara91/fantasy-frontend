@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
     games: [],
+    game:{},
 };
 
 export const GamesStore = (state = initialState, action) => {
@@ -9,7 +10,12 @@ export const GamesStore = (state = initialState, action) => {
         case actionTypes.FETCH_GAMES:
             return {
                 ...state,
-                games: [...action.payload]
+                games: [...action.payload],
+            };
+        case actionTypes.FETCH_GAME:
+            return {
+                ...state,
+                game: {...action.payload},
             };
         default:
             return state;

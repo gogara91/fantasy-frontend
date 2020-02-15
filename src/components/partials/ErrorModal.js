@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Modal} from "react-bootstrap";
-import {hideErrorModal, showErrorModal} from "../../redux/actions/errorActions";
-import * as actionTypes from '../../redux/actions/actionTypes'
+import {hideErrorModal} from "../../redux/actions/errorActions";
 export default () => {
     let showModal = useSelector(state => state.ErrorStore.modalVisible);
     let title = useSelector(state => state.ErrorStore.title);
@@ -16,10 +15,10 @@ export default () => {
 
     return (
         <Modal show={showModal}>
-            <Modal.Header>{title}</Modal.Header>
+            <Modal.Header className={textType}>{title}</Modal.Header>
             <Modal.Body>
                 <div className="col-md-12">
-                    <p className={textType}>{text}</p>
+                    <p>{text}</p>
                 </div>
                 <div className="col-md-12 text-right">
                     <button
