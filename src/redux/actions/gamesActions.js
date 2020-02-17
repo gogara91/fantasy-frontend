@@ -24,23 +24,19 @@ export const fetchGames = () => {
     }
 };
 
-const handleGameStartDispatcher = (data) => {
+const startGameDispatcher = (data) => {
     return {
         type: actionTypes.START_GAME,
         payload: data,
     }
 };
 
-export const handleGameStart = (gameId) => {
+export const startGame = (gameId, data) => {
     return async dispatch => {
         try {
-            const { data } = await GamesService.startGame(gameId);
+            await GamesService.startGame(gameId, data);
         } catch(e) {
-            return dispatch(showErrorModal({
-                title: 'Error!',
-                text: 'Game not found!',
-                type: actionTypes.ERROR_DANGER
-            }));
+            return Promise.reject(e.response.data);
         }
     }
 };

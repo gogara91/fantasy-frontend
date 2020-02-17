@@ -5,8 +5,8 @@ class TeamsService {
         return Http.get('games');
     }
 
-    startGame(gameId) {
-        return Http.put('games/start-game/' + gameId)
+    startGame(gameId, data) {
+        return Http.post('games/start-game/' + gameId, data)
     }
 
     fetchGame(gameId) {

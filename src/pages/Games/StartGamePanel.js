@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchGame} from "../../redux/actions/gamesActions";
+import {fetchGame, startGame} from "../../redux/actions/gamesActions";
 import PlayersTableStartingPanel from '../../components/games/PlayersTableStartingPanel';
 import {showErrorModal} from "../../redux/actions/errorActions";
+import {Redirect} from 'react-router-dom'
+
 import * as actionTypes from '../../redux/actions/actionTypes';
 class StartGamePanel extends Component {
     state = {
@@ -16,7 +18,7 @@ class StartGamePanel extends Component {
         this.props.fetchGame(this.props.match.params.id)
     }
 
-    pushToLineup = (playerId, team, callback = () => {}) => {
+    pushToLineup = (playerId, team) => {
         let lineUp = [];
         let lineUpArrayName = '';
         let starters = [];
@@ -120,6 +122,73 @@ class StartGamePanel extends Component {
         });
     };
 
+    startGame = () => {
+        const {homeTeamLineup, homeTeamStarters, awayTeamLineup, awayTeamStarters} = this.state;
+
+        if(homeTeamLineup.length < 5) {
+            this.props.showErrorModal({
+                title: 'Error!',
+                text: 'Please select lineup for home team.',
+                type: actionTypes.ERROR_DANGER
+            });
+            return;
+        }
+
+        if(homeTeamStarters.length < 5) {
+            this.props.showErrorModal({
+                title: 'Error!',
+                text: 'Please select starters for home team.',
+                type: actionTypes.ERROR_DANGER
+            });
+            return;
+        }
+
+        if(awayTeamLineup.length < 5) {
+            this.props.showErrorModal({
+                title: 'Error!',
+                text: 'Please select lineup for away team.',
+                type: actionTypes.ERROR_DANGER
+            });
+            return;
+        }
+
+        if(awayTeamStarters.length < 5) {
+            this.props.showErrorModal({
+                title: 'Error!',
+                text: 'Please select starters for away team.',
+                type: actionTypes.ERROR_DANGER
+            });
+            return;
+        }
+        if(homeTeamLineup.length < 12) {
+            if(!window.confirm('Your away team lineup isn\'t full (12 players), are you sure you want to continue?')) {
+                return;
+            }
+        }
+
+        if(awayTeamLineup.length < 12) {
+            if(!window.confirm('Your home team lineup isn\'t full (12 players), are you sure you want to continue?')) {
+                return;
+            }
+        }
+        this.props.startGame(this.props.game.id, {
+            homeTeamLineup,
+            homeTeamStarters,
+            awayTeamLineup,
+            awayTeamStarters
+        }).then((response) => {
+            this.props.history.push('/live-game-panel/' + this.props.game.id)
+
+        }).catch((e) => {
+            this.props.showErrorModal({
+                title: 'Error!',
+                text: e,
+                type: actionTypes.ERROR_DANGER
+            });
+        });
+
+    };
+
     render() {
         const {home_team, away_team} = this.props.game;
 
@@ -140,10 +209,20 @@ class StartGamePanel extends Component {
         /> : '';
 
         return (
-            <div className="row">
-                <div className="col-md-6">{homeTeamTable}</div>
-                <div className="col-md-6">{awayTeamTable}</div>
-            </div>
+            <>
+                <div className="row">
+                    <div className="col-md-6">{homeTeamTable}</div>
+                    <div className="col-md-6">{awayTeamTable}</div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12 text-right mb-3">
+                        <button
+                            className="btn btn-sm btn-outline-success"
+                            onClick={this.startGame}
+                        >Start game</button>
+                    </div>
+                </div>
+            </>
         );
     }
 
@@ -157,7 +236,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchGame: (gameId) => dispatch(fetchGame(gameId)),
-        showErrorModal: (data) => dispatch(showErrorModal(data))
+        showErrorModal: (data) => dispatch(showErrorModal(data)),
+        startGame: (id, data) => dispatch(startGame(id, data))
     }
 };
 

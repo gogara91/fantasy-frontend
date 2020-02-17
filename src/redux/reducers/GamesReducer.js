@@ -17,6 +17,10 @@ export const GamesStore = (state = initialState, action) => {
                 ...state,
                 game: {...action.payload},
             };
+        case actionTypes.START_GAME:
+            return {
+                ...state,
+            };
         default:
             return state;
     }

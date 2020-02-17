@@ -20,7 +20,6 @@ const showErrorModalDispatcher = (data) => {
 };
 
 export const showErrorModal = (data) => {
-    console.log(data);
     return (dispatch) => {
         dispatch(showErrorModalDispatcher(data))
     }
