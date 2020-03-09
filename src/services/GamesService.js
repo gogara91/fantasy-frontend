@@ -12,6 +12,10 @@ class TeamsService {
     fetchGame(gameId) {
         return Http.get('/games/' + gameId)
     }
+
+    fetchLiveGame(gameId) {
+        return Http.get(`/games/live-game/${gameId}`)
+    }
 }
 
 export default new TeamsService();

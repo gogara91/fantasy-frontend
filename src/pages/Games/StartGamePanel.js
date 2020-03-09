@@ -177,7 +177,7 @@ class StartGamePanel extends Component {
             awayTeamLineup,
             awayTeamStarters
         }).then((response) => {
-            this.props.history.push('/live-game-panel/' + this.props.game.id)
+            this.props.history.push('/games/live-game-panel/' + this.props.game.id)
 
         }).catch((e) => {
             this.props.showErrorModal({

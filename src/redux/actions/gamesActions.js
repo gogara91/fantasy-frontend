@@ -61,8 +61,29 @@ export const fetchGame = (gameId) => {
                 type: actionTypes.ERROR_DANGER
             }));
         }
-
     }
 };
 
+
+const fetchLiveGameDispatcher = (data) => {
+    return {
+        type: actionTypes.FETCH_LIVE_GAME,
+        payload: data
+    }
+};
+
+export const fetchLiveGame = (gameId) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await GamesService.fetchLiveGame(gameId);
+            dispatch(fetchLiveGameDispatcher(data));
+        } catch (e) {
+            showErrorModal({
+                title: 'Ooops!',
+                text: 'Something went wrong!',
+                type: actionTypes.ERROR_DANGER
+            });
+        }
+    }
+};
 

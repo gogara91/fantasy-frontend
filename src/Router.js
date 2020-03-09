@@ -5,6 +5,7 @@ import {GuestRoute} from './components/GuestRoute'
 import {AdminRoute} from './components/AdminRoute'
 
 import Games from './pages/Games/Games';
+import LiveGamePanel from './pages/Games/LiveGamePanel';
 import Teams from './pages/Teams/Teams';
 import Team from './pages/Teams/Team';
 import EditTeam from './pages/Teams/EditTeam';
@@ -32,7 +33,8 @@ class Routing extends Component {
                 <AdminRoute exact path='/teams/:id/games' component={Team} />
                 <AdminRoute exact path='/teams/:id/scores' component={Team} />
                 <AdminRoute exact path='/teams/:id/edit' component={EditTeam}  />
-                <AdminRoute exact path='/Games/:id/start-game' component={StartGamePanel}  />
+                <AdminRoute exact path='/games/:id/start-game' component={StartGamePanel}  />
+                <AdminRoute exact path='/games/live-game-panel/:id' component={LiveGamePanel}  />
             </AdminContent>;
 
         return (

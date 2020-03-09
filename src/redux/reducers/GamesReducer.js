@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes'
 const initialState = {
     games: [],
     game:{},
+    liveGame: {}
 };
 
 export const GamesStore = (state = initialState, action) => {
@@ -20,6 +21,11 @@ export const GamesStore = (state = initialState, action) => {
         case actionTypes.START_GAME:
             return {
                 ...state,
+            };
+        case actionTypes.FETCH_LIVE_GAME:
+            return {
+                ...state,
+                liveGame: {...action.payload}
             };
         default:
             return state;
