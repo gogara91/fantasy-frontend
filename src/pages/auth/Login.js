@@ -36,7 +36,6 @@ class Login extends Component {
     }
 
     render() {
-        console.log(!!this.props.location.state);
         return (
             <>
                 <div className="container login-container">

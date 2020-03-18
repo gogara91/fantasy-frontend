@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
-import LiveGameEventModal from "./LiveGameEventModal";
 
 export default (props) => {
-    let [showModal, switchModal] = useState(false);
-    let [player, setPlayer] = useState(false);
-    const openModal = (id) => {
-        switchModal(!showModal);
-        setPlayer(props.lineup.filter(player => player.player_id === id)[0]);
-    };
-
+    const getPlayer = (playerId) => {
+        return props.lineup.filter(player => player.player_id === playerId)[0]
+    }
     const players = (
         !props.lineup ? '' :
             <>
@@ -22,7 +17,7 @@ export default (props) => {
                         <td className="text-center">
                             <button
                                 className="btn btn-sm btn-primary"
-                                onClick={() => openModal(player.player_id)}
+                                onClick={() => props.openModal(getPlayer(player.player_id))}
                             >
                                 <span>+</span>
                             </button>
@@ -52,11 +47,6 @@ export default (props) => {
                 </tbody>
             </table>
         </div>
-        <LiveGameEventModal
-            showModal={showModal}
-            player={player}
-            gameId={props.gameId}
-        />
     </div>
     );
 

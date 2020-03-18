@@ -5,6 +5,7 @@ import {AuthStore} from './reducers/AuthReducer'
 import {ErrorStore} from './reducers/ErrorReducer'
 import {GamesStore} from './reducers/GamesReducer'
 import {RoundsStore} from './reducers/RoundsReducer'
+import {StatTypesStore} from './reducers/StatTypesReducer'
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const combinedReducer = {
@@ -12,7 +13,8 @@ const combinedReducer = {
     AuthStore,
     ErrorStore,
     GamesStore,
-    RoundsStore
+    RoundsStore,
+    StatTypesStore
 }
 const store =  createStore(combineReducers(combinedReducer), composeEnhancers(applyMiddleware(thunk)));
 
