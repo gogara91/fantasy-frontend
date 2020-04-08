@@ -36,7 +36,6 @@ export default (props) => {
                     <LiveGameTeamPanel
                         team={game.home_team}
                         lineup={game.home_team_lineup}
-                        gameId={game.id}
                         openModal={openModal}
                     />
                 </div>

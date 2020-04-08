@@ -22,7 +22,8 @@ export default (props) => {
                     to={`/games/${props.game.id}/start-game`}
                 >
                     Begin game
-                </Link> : ''}
+                </Link> :
+                <Link to={`/games/live-game-panel/${props.game.id}`}>Enter game panel</Link>}
             </td>: ''
             }
         </tr>
