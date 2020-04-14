@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 
 export default (props) => {
+
     const getPlayer = (playerId) => {
         return props.lineup.filter(player => player.player_id === playerId)[0]
-    }
+    };
+
     const players = (
         !props.lineup ? '' :
             <>
@@ -27,7 +29,6 @@ export default (props) => {
                 )}
             </>
     );
-
     const panel = (
     !props.team ? '' :
     <div className="card">

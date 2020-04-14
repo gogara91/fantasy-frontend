@@ -1,90 +1,54 @@
 import React, {useState} from "react";
+import {useDispatch} from "react-redux";
 import {Modal} from "react-bootstrap";
-import GameEventsModalService from "../../services/GameEventsModalService";
+import GameEventsService from "../../services/GameEventsService";
+import {StolenFromSubOption} from "../../pages/Games/StolenFromSubOption";
+import {showErrorModal} from "../../redux/actions/errorActions";
+import * as actionTypes from "../../redux/actions/actionTypes";
+
 export default (props) => {
-    const EventsService = new GameEventsModalService(props.statTypes);
+    const dispatch = useDispatch();
+    const EventsService = new GameEventsService(props.statTypes);
     const modalHeader = props.player.player ? `${props.player.player.first_name} ${props.player.player.last_name}` : '';
-
     const [events, setEvents] = useState();
-
-    const addToState = (data) => {
-        console.log(data);
-    };
-
-    const addStat = (statTypeData, playerData = {}) => {
-        let data = {}
-        if(!playerData.length) {
-           data = {
-               player_id: props.player.player_id,
-               game_id: props.player.game_id,
-               ...statTypeData,
-           }
-        } else {
-            data = {
-                ...statTypeData,
-                ...playerData
-            }
-        }
-        console.log(data);
-
-    }
+    const [selectedStat, setSelectedStat] = useState();
+    const [stealSubOptions, setStealSubOptions] = useState(false);
 
     const statChanged = (statId) => {
-        const stat = getStat(statId)
+        setStealSubOptions(false);
+        const stat = getStat(statId);
         switch(stat.abbreviation) {
-            case 'FTA':
-                addStat(EventsService.setStat('FTA'));
-                return;
-            case 'FTM':
-                addStat(EventsService.setStat('FTA'));
-                addStat(EventsService.setStat('FTM'));
-                addStat(EventsService.setPTS(1));
-                return;
-            case '2FGA':
-                addStat(EventsService.setStat('2FGA'));
-                return;
-            case '2FGM':
-                addStat(EventsService.setStat('2FGA'));
-                addStat(EventsService.setStat('2FGM'));
-                addStat(EventsService.setPTS(2));
-                return;
-            case '3FGA':
-                addStat(EventsService.setStat('3FGA'));
-                return;
-            case '3FGM':
-                addStat(EventsService.setStat('3FGA'));
-                addStat(EventsService.setStat('3FGM'));
-                addStat(EventsService.setPTS(3));
-                return;
-            case 'DREB':
-                addStat(EventsService.setStat('DREB'));
-                return;
-            case 'OREB':
-                addStat(EventsService.setStat('OREB'));
-                return;
-            case 'AST':
-                addStat(EventsService.setStat('AST'));
-                return;
             case 'STL':
-                addStat(EventsService.setStat('STL'));
-                return;
-            case 'TO':
-                addStat(EventsService.setStat('TO'));
-                return;
-            case 'BLK_FV':
-                addStat(EventsService.setStat('BLK_FV'));
-                return;
-            case 'BLK_AG':
-                addStat(EventsService.setStat('BLK_AG'));
-                return;
-            case 'PF_FV':
-                addStat(EventsService.setStat('PF_FV'));
-                return;
-            case 'PF_RV':
-                addStat(EventsService.setStat('PF_RV'));
+                setStealSubOptions(true);
                 return;
         }
+        setSelectedStat(getStat(statId));
+    };
 
+    const saveStats = async () => {
+        if(!selectedStat) {
+            dispatch(showErrorModal({
+                title: 'Error!',
+                text: 'Please select stat.',
+                type: actionTypes.ERROR_DANGER
+            }));
+            return;
+        }
+        try {
+            const {data} = await EventsService.saveStats({
+                game_id: props.player.game_id,
+                player_id: props.player.id,
+                stat_type: selectedStat,
+            });
+            closeModal();
+        } catch(error) {
+            dispatch(showErrorModal({
+                title: 'Error!',
+                text: 'There\'s an error on the server. Try again!',
+                type: actionTypes.ERROR_DANGER
+            }));
+            return;
+        }
     };
 
     const getStat = (statId) => {
@@ -102,7 +66,12 @@ export default (props) => {
                 type.abbreviation === 'FGM' ?
                 '' : <option key={type.id} value={type.id}>{type.name}</option>
         )}
-    </>
+    </>;
+    const closeModal = () => {
+        setStealSubOptions(false);
+        props.closeModal();
+    };
+
     return(
         <Modal show={props.showModal} size="xl">
             <Modal.Header>{modalHeader}</Modal.Header>
@@ -111,10 +80,27 @@ export default (props) => {
                     <div className="col-md-12">
                         <div className="form-group">
                             <label>Stat:</label>
-                            <select className="form-control" onChange={e => statChanged(e.target.value)}>
+                            <select
+                                className="form-control"
+                                onChange={e => statChanged(e.target.value)}
+                                value={selectedStat ? selectedStat.id : selectedStat}
+                                defaultValue='default'
+                            >
+                                <option disabled={true} value='default'>Select stat...</option>
                                 {statTypes}
                             </select>
                         </div>
+                    </div>
+                </div>
+                {stealSubOptions ? <StolenFromSubOption opposingPlayers={props.opposingPlayers} /> : ''}
+                <div className="row">
+                    <div className="col-md-12 text-right">
+                        <button onClick={() => closeModal()}
+                            className="btn btn-sm mr-2 btn-danger"
+                        >Cancel</button>
+                        <button onClick={saveStats}
+                            className="btn btn-sm btn-success"
+                        >Save stats</button>
                     </div>
                 </div>
             </Modal.Body>

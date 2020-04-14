@@ -8,9 +8,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-          <ErrorWindow/>
           <Router>
           </Router>
+          <ErrorWindow/>
       </div>
     </Provider>
 

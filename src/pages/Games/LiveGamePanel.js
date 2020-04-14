@@ -8,7 +8,9 @@ import LiveGameEventModal from "../../components/games/LiveGameEventModal";
 export default (props) => {
     const dispatch = useDispatch();
     let [player, setPlayer] = useState(false);
+    let [opposingPlayers, setOpposingPlayers] = useState(false);
     let [showModal, switchModal] = useState(false);
+    const game = useSelector(state => state.GamesStore.liveGame);
     const statTypes = useSelector(state => state.StatTypesStore.statTypes);
 
     useEffect(() => {
@@ -22,12 +24,18 @@ export default (props) => {
     const openModal = (player) => {
         switchModal(!showModal);
         setPlayer(player);
+        if(player.team_id == game.home_team_id) {
+            setOpposingPlayers(game.away_team_lineup);
+            return;
+        }
+        setOpposingPlayers(game.home_team_lineup);
     };
+    const closeModal = () => {
+        switchModal(false);
+    }
 
-    const game = useSelector(state => state.GamesStore.liveGame);
     const title = game.home_team ? `${game.home_team.full_name} - ${game.away_team.full_name}` : 'Loading game...';
     const subtitle = game.home_team ? game.home_team.city : '';
-
     return(
         <>
             <PageTitle title={title} subtitle={subtitle} />
@@ -49,7 +57,9 @@ export default (props) => {
                 </div>
                 <LiveGameEventModal
                     showModal={showModal}
+                    closeModal={closeModal}
                     player={player}
+                    opposingPlayers={opposingPlayers}
                     gameId={props.gameId}
                     statTypes={statTypes}
                 />
