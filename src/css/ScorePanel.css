@@ -1,0 +1,39 @@
+.score-digit {
+    width: 150px;
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.team-names {
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.between-vs {
+    font-size: 22px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.between-line {
+    font-size: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.scoreboard {
+    width: 700px;
+    max-width: 800px;
+    display: inline-block;
+    border: 1px solid #000;
+}

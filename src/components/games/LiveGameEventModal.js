@@ -37,7 +37,7 @@ export default (props) => {
         try {
             const {data} = await EventsService.saveStats({
                 game_id: props.player.game_id,
-                player_id: props.player.id,
+                player_id: props.player.player_id,
                 stat_type: selectedStat,
             });
             closeModal();

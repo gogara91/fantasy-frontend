@@ -5,14 +5,18 @@ import {fetchLiveGame} from "../../redux/actions/gamesActions";
 import {fetchStatTypes} from "../../redux/actions/statTypesActions";
 import LiveGameTeamPanel from '../../components/games/LiveGameTeamPanel'
 import LiveGameEventModal from "../../components/games/LiveGameEventModal";
+import ScorePanel from "../../components/games/ScorePanel";
+import BoxScore from '../../components/games/BoxScore';
+import {Tab, Tabs} from "react-bootstrap";
+
 export default (props) => {
     const dispatch = useDispatch();
-    let [player, setPlayer] = useState(false);
-    let [opposingPlayers, setOpposingPlayers] = useState(false);
-    let [showModal, switchModal] = useState(false);
+    const [player, setPlayer] = useState(false);
+    const [opposingPlayers, setOpposingPlayers] = useState(false);
+    const [showModal, switchModal] = useState(false);
     const game = useSelector(state => state.GamesStore.liveGame);
     const statTypes = useSelector(state => state.StatTypesStore.statTypes);
-
+    // const gameEvents = useSelector(state => state.GamesStore.gameEvents);
     useEffect(() => {
         dispatch(fetchLiveGame(props.match.params.id))
     },[]);
@@ -39,6 +43,23 @@ export default (props) => {
     return(
         <>
             <PageTitle title={title} subtitle={subtitle} />
+            <div className="row mb-3">
+                <div className="col-md-12 text-center">
+                    <ScorePanel />
+                </div>
+            </div>
+            <div className="row mb-3">
+                <div className="col-md-12">
+                    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
+                        <Tab eventKey="home" title="Home">
+                            <BoxScore game={game} team_id={game.home_team_id} />
+                        </Tab>
+                        <Tab eventKey="away" title="Away">
+                            <BoxScore game={game} team_id={game.away_team_id} />
+                        </Tab>
+                    </Tabs>
+                </div>
+            </div>
             <div className="row">
                 <div className="col-md-6">
                     <LiveGameTeamPanel
