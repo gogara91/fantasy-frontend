@@ -23,6 +23,7 @@ export const FETCH_GAME = 'FETCH_GAME'
 export const FETCH_ROUNDS = 'FETCH_ROUNDS'
 export const START_GAME = 'FETCH_ROUNDS'
 export const FETCH_LIVE_GAME = 'FETCH_LIVE_GAME'
+export const ADD_GAME_STATS = 'ADD_GAME_STATS'
 
 // Stats
 export const FETCH_STAT_TYPES = 'FETCH_STAT_TYPES'

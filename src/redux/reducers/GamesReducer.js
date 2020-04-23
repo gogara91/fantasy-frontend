@@ -27,6 +27,14 @@ export const GamesStore = (state = initialState, action) => {
                 ...state,
                 liveGame: {...action.payload}
             };
+        case actionTypes.ADD_GAME_STATS:
+            return {
+                ...state,
+                liveGame: {
+                    ...state.liveGame,
+                    game_events: [...state.liveGame.game_events, ...action.payload]
+                }
+            };
         default:
             return state;
     }

@@ -31,26 +31,49 @@ export default class GameEventsService {
                         abbreviation === 'PTS'
                     }
                 )];
-                console.log('1');
                 pts = 1;
                 break;
             case '2FGM':
                 stats = [...this.statTypes.filter(({abbreviation}) => {
                         return abbreviation === '2FGM' ||
                         abbreviation === '2FGA' ||
+                        abbreviation === 'FGA' ||
+                        abbreviation === 'FGM' ||
                         abbreviation === 'PTS'
                     }
                 )];
                 pts = 2;
                 break;
+            case '2FGA':
+                stats = [...this.statTypes.filter(({abbreviation}) => {
+                        return abbreviation === 'FGA' ||
+                            abbreviation === '2FGA'
+                    }
+                )];
+                break;
             case '3FGM':
                 stats = [...this.statTypes.filter(({abbreviation}) => {
                         return abbreviation === '3FGM' ||
                         abbreviation === '3FGA' ||
+                        abbreviation === 'FGA' ||
+                        abbreviation === 'FGM' ||
                         abbreviation === 'PTS'
                     }
                 )];
                 pts = 3;
+                break;
+            case '3FGA':
+                stats = [...this.statTypes.filter(({abbreviation}) => {
+                        return abbreviation === 'FGA' ||
+                        abbreviation === '3FGA'
+                    }
+                )];
+                break;
+            case 'TO':
+                stats = [...this.statTypes.filter(({abbreviation}) => {
+                        return abbreviation === 'TO'
+                    }
+                )];
                 break;
         }
         return stats.map(stat => {
