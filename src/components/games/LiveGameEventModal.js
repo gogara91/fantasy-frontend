@@ -11,19 +11,28 @@ export default (props) => {
     const dispatch = useDispatch();
     const EventsService = new GameEventsService(props.statTypes);
     const modalHeader = props.player.player ? `${props.player.player.first_name} ${props.player.player.last_name}` : '';
-    const [events, setEvents] = useState();
     const [selectedStat, setSelectedStat] = useState();
     const [selectedOpposingPlayer, changeSelectedOpposingPlayer] = useState(false);
-    const [stealSubOptions, setStealSubOptions] = useState(false);
-
+    const [showSubOptions, setShowSubOptions] = useState(false);
+    const [subOptionTitle, setSubOptionTitle] = useState('');
     // Controls what happens when select dropdown has changed
     // in some cases its required to select opposing team player, for example for steals, blocks
     const statChanged = (statId) => {
-        setStealSubOptions(false);
+        setShowSubOptions(false);
+        setSubOptionTitle('');
         const stat = getStat(statId);
         switch(stat.abbreviation) {
             case 'STL':
-                setStealSubOptions(true);
+                setSubOptionTitle('Stolen from: ');
+                setShowSubOptions(true);
+                break;
+            case 'BLK_FV':
+                setSubOptionTitle('Player blocked: ');
+                setShowSubOptions(true);
+                break;
+            case 'PF_FV':
+                setSubOptionTitle('Foul commited on: ');
+                setShowSubOptions(true);
                 break;
         }
         setSelectedStat(getStat(statId));
@@ -44,11 +53,11 @@ export default (props) => {
 
     // If we selected steal, we get to select opposing team player from which ball was stolen
     // this sends additional request for it.
-    const addTurnoverFromSuboption = () => {
-        return addSelectedStat({
+    const addSubOptionStat = (abbreviation) => {
+        EventsService.setStat({
             game_id: props.player.game_id,
             player_id: selectedOpposingPlayer,
-            stat_type: {abbreviation: 'TO'},
+            stat_type: {abbreviation},
         });
     }
 
@@ -73,9 +82,19 @@ export default (props) => {
             // check if steal is selected as stat. If its steal,
             // you have to select who is the ball stolen from.
             if(selectedStat.abbreviation === 'STL') {
-                const responseTO = await addTurnoverFromSuboption();
-                dispatch(addGameStats(responseTO.data));
+                addSubOptionStat('TO');
             }
+            // check if blocked shot is selected as stat. If its steal,
+            // you have to select who is the blocked player.
+            if(selectedStat.abbreviation === 'BLK_FV') {
+                addSubOptionStat('BLK_AG');
+            }
+            // check if blocked shot is selected as stat. If its steal,
+            // you have to select who is the blocked player.
+            if(selectedStat.abbreviation === 'PF_FV') {
+                addSubOptionStat('PF_RV');
+            }
+
             const response = await addSelectedStat();
             dispatch(addGameStats(response.data));
             closeModal();
@@ -106,7 +125,8 @@ export default (props) => {
         )}
     </>;
     const closeModal = () => {
-        setStealSubOptions(false);
+        setSubOptionTitle('');
+        setShowSubOptions(false);
         setSelectedStat();
         props.closeModal();
     };
@@ -131,11 +151,15 @@ export default (props) => {
                         </div>
                     </div>
                 </div>
-                {stealSubOptions ? <OpposingTeamSuboption
-                    selectedPlayer={selectedOpposingPlayer}
-                    changeSelectedPlayer={changeOpposingPlayer}
-                    opposingPlayers={props.opposingPlayers} /> : ''
+                {showSubOptions ?
+                    <OpposingTeamSuboption
+                        title={subOptionTitle}
+                        selectedPlayer={selectedOpposingPlayer}
+                        changeSelectedPlayer={changeOpposingPlayer}
+                        opposingPlayers={props.opposingPlayers}
+                    /> : ''
                 }
+
                 <div className="row">
                     <div className="col-md-12 text-right">
                         <button onClick={() => closeModal()}

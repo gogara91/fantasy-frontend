@@ -4,7 +4,7 @@ export const OpposingTeamSuboption = (props) => {
    return (
        <div className="row">
            <div className="col-md-12 form-group">
-               <label>Stolen from: </label>
+               <label>{props.title} </label>
                <select
                    defaultValue="default"
                    className="form-control"

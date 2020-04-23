@@ -4,6 +4,7 @@ export default class GameEventsService {
     statTypes;
     player_id;
     game_id;
+    stats = [];
     constructor(statTypes) {
         this.statTypes = statTypes;
     }
@@ -11,13 +12,17 @@ export default class GameEventsService {
     setPTS() {
         const type = this.statTypes.filter(type => type.abbreviation === 'FTA');
     }
-
+    setStat(data) {
+        this.player_id = data.player_id
+        this.game_id = data.game_id
+        this.getAllStats(data.stat_type);
+    }
     async saveStats(data) {
         this.player_id = data.player_id
         this.game_id = data.game_id
-        const stats = this.getAllStats(data.stat_type);
-
-        return Http.post('game-events', {stats});
+        this.getAllStats(data.stat_type);
+        console.log(this.stats);
+        return Http.post('game-events', {stats: this.stats});
     }
 
     getAllStats(stat) {
@@ -75,8 +80,20 @@ export default class GameEventsService {
                     }
                 )];
                 break;
+            case 'BLK_AG':
+                stats = [...this.statTypes.filter(({abbreviation}) => {
+                        return abbreviation === 'BLK_AG'
+                    }
+                )];
+                break;
+            case 'PF_RV':
+                stats = [...this.statTypes.filter(({abbreviation}) => {
+                        return abbreviation === 'PF_RV'
+                    }
+                )];
+                break;
         }
-        return stats.map(stat => {
+        const data = stats.map(stat => {
             let data = {
                 stat_type_id: stat.id,
                 game_id: this.game_id,
@@ -88,6 +105,7 @@ export default class GameEventsService {
             }
             return data;
         });
+        this.stats = [...this.stats, ...data];
     }
 
 }
