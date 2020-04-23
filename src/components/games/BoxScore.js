@@ -7,7 +7,6 @@ import {StatTypesStore} from "../../redux/reducers/StatTypesReducer";
 export default (props) => {
     const lineup = props.game.home_team_id === props.team_id ?
         props.game.home_team_lineup : props.game.away_team_lineup;
-    console.log(props.game.game_events);
     const events = props.game.game_events ? props.game.game_events : '';
     const playerTotals = [];
     const statTypes = useSelector(state => state.StatTypesStore.statTypes)

@@ -21,7 +21,6 @@ export default class GameEventsService {
         this.player_id = data.player_id
         this.game_id = data.game_id
         this.getAllStats(data.stat_type);
-        console.log(this.stats);
         return Http.post('game-events', {stats: this.stats});
     }
 

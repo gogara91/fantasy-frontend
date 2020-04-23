@@ -89,7 +89,6 @@ export const fetchLiveGame = (gameId) => {
 
 export const addGameStats = (data) => {
     return async dispatch => {
-        console.log(data);
         dispatch({
                 type: actionTypes.ADD_GAME_STATS,
                 payload: data
