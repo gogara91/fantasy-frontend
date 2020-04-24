@@ -69,7 +69,9 @@ class EditTeam extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-12 text-right'>
-                        <PrimaryButton buttonText='Save' onClick={(e)=> this.handleClick(e)} />
+                        <PrimaryButton onClick={(e)=> this.handleClick(e)}>
+                            Save
+                        </PrimaryButton>
                     </div>
                 </div>
             </>

@@ -8,6 +8,7 @@ import LiveGameEventModal from "../../components/games/LiveGameEventModal";
 import ScorePanel from "../../components/games/ScorePanel";
 import BoxScore from '../../components/games/BoxScore';
 import {Tab, Tabs} from "react-bootstrap";
+import PrimaryButton from "../../components/pageBuilder/PrimaryButton";
 
 export default (props) => {
     const dispatch = useDispatch();
@@ -84,6 +85,13 @@ export default (props) => {
                     gameId={props.gameId}
                     statTypes={statTypes}
                 />
+            </div>
+            <div className="row">
+                <div className="col-md-12 text-right">
+                    <PrimaryButton className="mt-3" onClick={()=> alert('Not yet implemented.')}>
+                        Finish game
+                    </PrimaryButton>
+                </div>
             </div>
         </>
     )

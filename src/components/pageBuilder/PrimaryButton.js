@@ -5,10 +5,10 @@ function PrimaryButton(props) {
     return(
         <>
             <button
-                className='btn btn-outline-primary btn-sm'
+                className={['btn btn-outline-primary btn-sm ' + props.className]}
                 onClick={() => props.onClick()}
             >
-                {props.buttonText}
+                {props.children}
             </button>
         </>
     )
