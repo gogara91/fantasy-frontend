@@ -21,7 +21,8 @@ import AdminContent from './components/partials/AdminContent';
 import {BrowserRouter as Router} from "react-router-dom";
 import {connect} from 'react-redux';
 import {Row} from 'react-bootstrap';
-
+import UserHomePage from "./pages/Home/UserHomePage";
+import EditFantasyTeam from "./pages/FantasyTeams/EditFantasyTeam";
 class Routing extends Component {
     render() {
         const adminRoutes =  !this.props.isAdmin ? '' :
@@ -41,8 +42,9 @@ class Routing extends Component {
             <Router>
                 <Row noGutters={true}>
                     { this.props.isAdmin ? <AdminSidebar></AdminSidebar> : <Navbar></Navbar> }
-                    <ProtectedRoute path='/players' component={Players}  />
+                    <ProtectedRoute exact path='/' component={UserHomePage}  />
                     <ProtectedRoute exact path='/logout' component={Logout}  />
+                    <ProtectedRoute exact path='/fantasy-teams/:id/edit' component={EditFantasyTeam}  />
                     <GuestRoute path='/login' component={Login}  />
                     <GuestRoute path='/register' component={Register}  />
                     {adminRoutes}

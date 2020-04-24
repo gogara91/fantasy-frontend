@@ -15,6 +15,7 @@ const FormGroup = (props) => {
                 type={props.input.type}
                 className={inputClassNames}
                 value={ props.input.value ? props.input.value : '' }
+                placeholder={ props.input.placeholder ? props.input.placeholder : '' }
                 onChange={(e)=> props.onInputChange(e)}
             />
         </div>

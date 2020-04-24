@@ -1,0 +1,40 @@
+.create-team-btn {
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    border: 2px #888888 dashed;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.create-team-btn:hover {
+    text-decoration: none;
+}
+
+.create-team-btn:hover p:last-child{
+    color: #8811c5;
+}
+
+.create-team-btn p {
+    padding: 0;
+    margin:0;
+    color: #888888;
+}
+
+.create-team-btn p:first-child {
+    color: #8811c5;
+    padding: 30px 0;
+    vertical-align: middle;
+}
+
+.create-team-btn p:last-child {
+    padding-bottom: 30px;
+    font-weight: bold;
+    color: #000000;
+    font-size: 25px;
+}
+
+.create-team-btn p .plus {
+    font-size: 40px;
+}

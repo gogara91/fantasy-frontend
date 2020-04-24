@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Navbar extends Component {
 
     links = [
-        { to: '/players', name: 'Players', type: 'auth'},
+        { to: '/', name: 'Home', type: 'auth'},
         { to: '/teams', name: 'Teams', type: 'auth'}
     ];
 
