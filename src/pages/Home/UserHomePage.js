@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import CreateTeamStyles from '../../css/CreateTeamButton.css'
-import AddFantasyTeamModal from "../../components/AddFantasyTeamModal";
+import AddFantasyTeamModal from "../../components/CreateFantasyTeamModal";
 export default class UserHomePage extends Component {
     state =  {
         showModal: false
