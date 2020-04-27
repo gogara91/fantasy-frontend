@@ -4,10 +4,9 @@ import {showErrorModal} from "./errorActions";
 
 const fetchTeamsDispatcher = (data) => {
     return {
-            type: actionTypes.FETCH_TEAMS,
-            payload: data
+        type: actionTypes.FETCH_TEAMS,
+        payload: data
     }
-
 };
 
 export const fetchTeams = () => {

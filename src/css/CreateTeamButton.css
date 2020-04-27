@@ -1,4 +1,4 @@
-.create-team-btn {
+.manage-team-btn, .create-team-btn {
     margin-top: 15px;
     text-align: center;
     width: 100%;
@@ -12,29 +12,50 @@
     text-decoration: none;
 }
 
-.create-team-btn:hover p:last-child{
-    color: #8811c5;
+.create-team-btn:hover p:last-child, .manage-team-btn:hover p:last-child {
+    color: #0062ff;
 }
 
-.create-team-btn p {
+.manage-team-btn p, .create-team-btn p {
     padding: 0;
     margin:0;
-    color: #888888;
 }
 
 .create-team-btn p:first-child {
-    color: #8811c5;
+    color: #0062ff;
     padding: 30px 0;
     vertical-align: middle;
 }
 
-.create-team-btn p:last-child {
-    padding-bottom: 30px;
-    font-weight: bold;
-    color: #000000;
+.manage-team-btn p:first-child {
+    padding: 30px 0;
+    vertical-align: middle;
+}
+
+.manage-team-btn p:first-child {
     font-size: 25px;
 }
 
+.manage-team-btn p:last-child, .create-team-btn p:last-child {
+    padding-bottom: 30px;
+    font-weight: bold;
+    color: #000000;
+    font-size: 20px;
+}
+
+
+.manage-team-btn p:last-child span a {
+    background:#0062ff;
+    color:#fff;
+    padding: 13px;
+    border-radius: 8px;
+}
+
 .create-team-btn p .plus {
-    font-size: 40px;
+    font-size: 34.2px;
+}
+
+.manage-team-btn p:last-child span a:hover {
+    text-decoration: none;
+    background:#0088ef;
 }

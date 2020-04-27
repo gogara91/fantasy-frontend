@@ -18,12 +18,16 @@ export const FETCH_TEAM_SCORES = 'FETCH_TEAM_SCORES';
 export const UPDATE_TEAM = 'UPDATE_TEAM';
 
 // Games
-export const FETCH_GAMES = 'FETCH_GAMES'
-export const FETCH_GAME = 'FETCH_GAME'
-export const FETCH_ROUNDS = 'FETCH_ROUNDS'
-export const START_GAME = 'FETCH_ROUNDS'
-export const FETCH_LIVE_GAME = 'FETCH_LIVE_GAME'
-export const ADD_GAME_STATS = 'ADD_GAME_STATS'
+export const FETCH_GAMES = 'FETCH_GAMES';
+export const FETCH_GAME = 'FETCH_GAME';
+export const FETCH_ROUNDS = 'FETCH_ROUNDS';
+export const START_GAME = 'FETCH_ROUNDS';
+export const FETCH_LIVE_GAME = 'FETCH_LIVE_GAME';
+export const ADD_GAME_STATS = 'ADD_GAME_STATS';
 
 // Stats
-export const FETCH_STAT_TYPES = 'FETCH_STAT_TYPES'
+export const FETCH_STAT_TYPES = 'FETCH_STAT_TYPES';
+
+// Fantasy teams
+export const FETCH_FANTASY_TEAMS_FOR_USER = 'FETCH_FANTASY_TEAMS_FOR_USER';
+export const FETCH_FANTASY_TEAM = 'FETCH_FANTASY_TEAM';

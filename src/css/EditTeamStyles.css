@@ -1,0 +1,33 @@
+.court-overlay {
+    width: 100%;
+    height: 690px;
+    top: 0;
+    left: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.court-img {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+
+}
+.frontcourt-container {
+    padding-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.midcourt-container {
+    padding-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.backcourt-container {
+    padding-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
