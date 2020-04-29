@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {handleFetchFantasyTeam} from '../../redux/actions/fantasyTeamsActions';
 import EditTeamStyles from '../../css/EditTeamStyles.css';
 import {PlayerJersey} from "../../components/fantasyTeams/PlayerJersey";
-import PlayersList from '../../components/fantasyTeams/PlayersListSelector'
+import PlayersListFilters from '../../components/fantasyTeams/PlayersListFilters'
+import PlayersList from '../../components/fantasyTeams/PlayersList'
 class EditFantasyTeam extends Component {
 
     componentDidMount() {
@@ -35,6 +36,7 @@ class EditFantasyTeam extends Component {
                             </div>
                         </div>
                         <div className="col-md-5">
+                            <PlayersListFilters></PlayersListFilters>
                             <PlayersList></PlayersList>
                         </div>
                     </div>

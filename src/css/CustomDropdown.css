@@ -1,5 +1,6 @@
 .custom-dropdown {
     width: 100%;
+    background: #fff;
 }
 
 .custom-dropdown .title-bar {
@@ -54,4 +55,11 @@
 
 .custom-dropdown.active .custom-dropdown-outer-container  .custom-dropdown-list li:last-child span {
     border-bottom: 1px solid #fff;
+}
+
+.item {
+    cursor: pointer;
+}
+.item:hover {
+    background: rgb(241,231,231);
 }

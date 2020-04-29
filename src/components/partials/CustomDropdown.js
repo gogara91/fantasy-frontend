@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
 import CustomDropdownItems from "./CustomDropdownItems";
@@ -21,13 +21,23 @@ export default (props) => {
     }
 
     const onSelect = (el) => {
-        setPlaceholder(el.value)
+        props.setSelectedItems(el);
+        if(!props.multiselect) {
+            setPlaceholder(el.value);
+            props.switchActive();
+        }
     }
 
     return (
         <div className={dropdownWrapperClasses.join(' ')}>
             <div className="title-bar" onClick={() => toggleDropdown()}>
-                <span className="title-bar-text">{placeholder}</span>
+                <span className="title-bar-text">
+                    <Placeholder
+                        text={placeholder}
+                        selectedPlaceholder={props.selectedPlaceholder}
+                        items={props.checkedItems}
+                    />
+                </span>
                 <span className="title-bar-icon">
                             <FontAwesomeIcon
                                 icon={props.isActive ? faAngleUp : faAngleDown}
@@ -36,10 +46,21 @@ export default (props) => {
             </div>
             {!props.isActive ? '' :
                 <CustomDropdownItems
+                    multiselect={props.multiselect}
+                    checkedItems={props.checkedItems}
                     onSelect={(el)=> onSelect(el)}
                     items={props.listItems}
                 />
             }
         </div>
+    )
+}
+
+const Placeholder = (props) => {
+    return (
+        <>
+            {props.selectedPlaceholder && props.items.length ?
+                props.selectedPlaceholder + props.items.length : props.text}
+        </>
     )
 }
