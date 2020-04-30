@@ -1,0 +1,18 @@
+.page-link {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.page-link.disabled {
+    cursor:default;
+    color: #000;
+    background: #ececec;
+}
+
+.page-link.disabled:hover {
+    background: #ececec;
+}

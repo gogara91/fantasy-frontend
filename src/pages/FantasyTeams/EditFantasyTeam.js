@@ -36,8 +36,8 @@ class EditFantasyTeam extends Component {
                             </div>
                         </div>
                         <div className="col-md-5">
-                            <PlayersListFilters></PlayersListFilters>
-                            <PlayersList></PlayersList>
+                            <PlayersListFilters />
+                            <PlayersList />
                         </div>
                     </div>
                 </div>
