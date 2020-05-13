@@ -3,7 +3,7 @@ import store from '../redux/store'
 import LocalStorageService from "./LocalStorageService";
 import { HANDLE_LOGOUT } from '../redux/actions/actionTypes'
 const Http = Axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/',
+    baseURL: 'https://bbal-fantasy-backend.herokuapp.com/api/',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
