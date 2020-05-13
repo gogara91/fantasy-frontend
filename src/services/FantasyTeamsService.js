@@ -14,4 +14,4 @@ class FantasyTeamsService {
     }
 }
 
-export default new FantasyTeamsService;
+export default new FantasyTeamsService();

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Modal} from "react-bootstrap";
 import {hideErrorModal} from "../../redux/actions/errorActions";

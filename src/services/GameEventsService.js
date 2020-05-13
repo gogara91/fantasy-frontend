@@ -9,14 +9,12 @@ export default class GameEventsService {
         this.statTypes = statTypes;
     }
 
-    setPTS() {
-        const type = this.statTypes.filter(type => type.abbreviation === 'FTA');
-    }
     setStat(data) {
         this.player_id = data.player_id
         this.game_id = data.game_id
         this.getAllStats(data.stat_type);
     }
+
     async saveStats(data) {
         this.player_id = data.player_id
         this.game_id = data.game_id

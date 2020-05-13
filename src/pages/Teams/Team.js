@@ -7,7 +7,7 @@ import PageTitle from '../../components/partials/PageTitle';
 import TeamHomePage from '../../components/teams/TeamHomePage'
 import TeamGames from '../../components/teams/TeamGames'
 import TeamScores from '../../components/teams/TeamScores'
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 class Team extends Component {
 
