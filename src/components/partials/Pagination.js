@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import PlayerListItem from "../fantasyTeams/PlayerListItem";
-import PaginationStyles from '../../css/Pagination.css'
+import React from 'react';
 export default (props) => {
     const totalPages = Math.ceil(props.items.length / 10);
     const pagination = [];

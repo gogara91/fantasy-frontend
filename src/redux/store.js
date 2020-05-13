@@ -12,7 +12,6 @@ import {GamesStore} from './reducers/GamesReducer'
 import {RoundsStore} from './reducers/RoundsReducer'
 import {StatTypesStore} from './reducers/StatTypesReducer'
 import {FantasyTeamsStore} from './reducers/FantasyTeamsReducer'
-import {FantasyTeamPlayersSelectorStore} from "./reducers/FantasyTeamPlayersSelectorReducer";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -25,7 +24,6 @@ const combinedReducer = {
     RoundsStore,
     StatTypesStore,
     FantasyTeamsStore,
-    FantasyTeamPlayersSelectorStore
 }
 const store =  createStore(combineReducers(combinedReducer), composeEnhancers(applyMiddleware(thunk)));
 

@@ -1,6 +1,8 @@
 .custom-dropdown {
     width: 100%;
     background: #fff;
+    border-radius: 10px;
+    position: relative;
 }
 
 .custom-dropdown .title-bar {
@@ -29,6 +31,11 @@
     border-bottom-right-radius: 0px;
 }
 
+.custom-dropdown  .custom-dropdown-outer-container {
+    position: absolute;
+    background: #fff;
+    z-index: 2;
+}
 .custom-dropdown  .custom-dropdown-outer-container .custom-dropdown-list {
     color: rgb(73, 80, 87);
     list-style: none;

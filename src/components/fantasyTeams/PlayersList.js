@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
-import PlayerListStyles from '../../css/PlayerListStyles.css';
+import '../../css/PlayerListStyles.css';
 import PlayerListItem from './PlayerListItem'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Pagination from "../partials/Pagination";
-import {FantasyTeamsStore} from "../../redux/reducers/FantasyTeamsReducer";
+import * as actionTypes from '../../redux/actions/actionTypes';
 
 export default (props) => {
-    const players = useSelector(store => store.PlayersStore.playersWithTeam);
+    const dispatch = useDispatch();
+    const players = useSelector(store => store.PlayersStore.filteredPayersWithTeam);
     const fantasyTeam = useSelector(store => store.FantasyTeamsStore.team);
     const [shownPlayers, setShownPlayers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,18 @@ export default (props) => {
     useEffect(() => {
         setShownPlayers(players.slice(offset, perPage+offset));
     },[players, offset]);
-    console.log(fantasyTeam.players);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [players]);
+
+    useEffect(() => {
+        return () => {
+            dispatch({
+                type: actionTypes.RESET_PLAYER_FILTERS
+            });
+        }
+    }, [])
     const list = !players ? '' :
         shownPlayers.map(player => {
             // check if fantasyTeam has that player in team

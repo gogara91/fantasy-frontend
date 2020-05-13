@@ -1,15 +1,15 @@
 import * as actionTypes from './actionTypes';
 
-const setPlayerNameDispatcher = (name) => {
+const filterPlayersByNameDispatcher = (name) => {
     return {
-        type: actionTypes.SET_PLAYER_NAME_FILTER,
+        type: actionTypes.FILTER_PLAYERS_BY_NAME,
         payload: name
     }
 }
 
-export const setPlayerName = (name) => {
+export const filterPlayersByName = (name) => {
     return async (dispatch) => {
-        dispatch(setPlayerNameDispatcher(name))
+        dispatch(filterPlayersByNameDispatcher(name))
     }
 }
 

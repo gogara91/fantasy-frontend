@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
 import CustomDropdownItems from "./CustomDropdownItems";
-import CustomDropdownStyles from '../../css/CustomDropdown.css'
+import '../../css/CustomDropdown.css'
 
 export default (props) => {
 

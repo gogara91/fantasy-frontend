@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import CustomDropdownStyles from '../../css/CustomDropdown.css'
+import '../../css/CustomDropdown.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare} from "@fortawesome/free-solid-svg-icons";
 

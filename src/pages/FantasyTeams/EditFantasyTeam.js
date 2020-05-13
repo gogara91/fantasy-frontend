@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import CourtImg from '../../images/bbcourt.jpg';
 import {connect} from 'react-redux';
 import {handleFetchFantasyTeam} from '../../redux/actions/fantasyTeamsActions';
-import EditTeamStyles from '../../css/EditTeamStyles.css';
+import '../../css/EditTeamStyles.css';
 import {PlayerJersey} from "../../components/fantasyTeams/PlayerJersey";
 import PlayersListFilters from '../../components/fantasyTeams/PlayersListFilters'
 import PlayersList from '../../components/fantasyTeams/PlayersList'

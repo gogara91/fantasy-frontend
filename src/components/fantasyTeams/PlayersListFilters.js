@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from "react";
 import FormGroup from "../pageBuilder/FormGroup";
 import CustomDropdown from "../partials/CustomDropdown";
-import{setPlayerName, setSortBy, setSelectedTeamsFilter} from '../../redux/actions/FantasyTeamPlayersSelectorActions';
+import{filterPlayersByName, setSortBy, setSelectedTeamsFilter} from '../../redux/actions/FantasyTeamPlayersSelectorActions';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTeams} from "../../redux/actions/teamsActions";
 import {fetchAllPlayers} from '../../redux/actions/playerActions';
-import PlayersList from "./PlayersList";
+
 export default (props) => {
     const dispatch = useDispatch();
     const [isOrderByDropdownActive, switchIsOrderByDropdownActive] = useState(false);
     const [isTeamsDropdownActive, switchIsTeamsDropdownActive] = useState(false);
 
-    const checkedTeams = useSelector(store => store.FantasyTeamPlayersSelectorStore.teamsFilter);
-    const playerInput = useSelector(store => store.FantasyTeamPlayersSelectorStore.playerNameFilter);
+    const checkedTeams = useSelector(store => store.PlayersStore.teamsFilter);
+    const playerInput = useSelector(store => store.PlayersStore.playerNameFilter);
 
     const storeTeams = useSelector(store => store.TeamsStore.teams);
     const teams = storeTeams ? storeTeams.map(team => {
@@ -21,7 +21,6 @@ export default (props) => {
     useEffect(()=> {
         dispatch(fetchTeams());
         dispatch(fetchAllPlayers());
-
     }, [])
 
     const switchTeamsDropdown = () => {
@@ -50,7 +49,7 @@ export default (props) => {
     }
 
     const onPlayerSearchInput = (e) => {
-        dispatch(setPlayerName(e.target.value));
+        dispatch(filterPlayersByName(e.target.value));
     }
 
     const orderByListItems = [
