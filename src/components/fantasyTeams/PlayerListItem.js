@@ -1,9 +1,26 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {handleAddPlayerToFantasyTeam} from "../../redux/actions/fantasyTeamsActions";
+import { useParams } from 'react-router-dom'
 
 export default(props) => {
-    const {first_name, last_name, team, position} = props.player;
+    const dispatch = useDispatch();
+    const {first_name, last_name, team, position, fantasy_cost, id} = props.player;
+    const fantasyTeamId = useParams().id;
+    const fantasyTeamPlayers = useSelector(state => state.FantasyTeamsStore.team.players);
+    const alreadySelectedPositions = fantasyTeamPlayers.map(player => player.player.position);
+
+    const addToFantasyTeam = () => {
+        if(alreadySelectedPositions.includes(position)) {
+            if(!window.confirm('You already have player at this position in lineup. Do you want to add to bench?')) {
+                return;
+            }
+        }
+        dispatch(handleAddPlayerToFantasyTeam(id, fantasyTeamId))
+    }
+
     return (
         <div className="player-list-item">
             <div className="team-position-nugget-wrapper">
@@ -30,8 +47,9 @@ export default(props) => {
                 <button
                     className="add-player-btn"
                     disabled={props.disabled}
+                    onClick={() => addToFantasyTeam()}
                 >
-                    24.17 cr
+                    {fantasy_cost} cr
                     <FontAwesomeIcon className="icon" icon={faPlus} />
                 </button>
             </div>

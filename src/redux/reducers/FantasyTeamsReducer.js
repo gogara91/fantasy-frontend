@@ -17,6 +17,30 @@ export const FantasyTeamsStore = (state= initialState, action) => {
                 ...state,
                 team: action.payload
             }
+        case actionTypes.SET_FANTASY_TEAM_PLAYERS:
+            return {
+                ...state,
+                team: {...state.team, players: [...action.payload]}
+            }
+        case actionTypes.ADD_PLAYER_TO_FANTASY_TEAM:
+            return {
+                ...state,
+                team: {
+                    ...state.team,
+                    used_budget: action.payload.used_budget,
+                    players: [...state.team.players, action.payload.player]
+                }
+            }
+        case actionTypes.REMOVE_FANTASY_PLAYER:
+            console.log(action.payload.players);
+            return {
+                ...state,
+                team: {
+                    ...state.team,
+                    used_budget: action.payload.used_budget,
+                    players: [...action.payload.players]
+                }
+            }
         default: return state;
     }
 }

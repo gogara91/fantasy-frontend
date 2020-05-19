@@ -31,3 +31,16 @@
     display: flex;
     justify-content: center;
 }
+
+.team-info-panel {
+    border-radius: 8px;
+    width: 100%;
+    background: rgba(61, 68, 89, 0.9);
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.bench-players {
+    display: flex;
+    align-content: flex-start;
+}
