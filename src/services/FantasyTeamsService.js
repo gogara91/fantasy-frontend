@@ -12,6 +12,13 @@ class FantasyTeamsService {
     create(data) {
         return Http.post('fantasy-teams', data);
     }
+
+    addPlayer(playerId, teamId) {
+        return Http.post(`fantasy-teams/${teamId}/add-player`, {player_id: playerId});
+    }
+    removePlayer(playerId) {
+        return Http.delete(`fantasy-teams/${playerId}`);
+    }
 }
 
 export default new FantasyTeamsService();

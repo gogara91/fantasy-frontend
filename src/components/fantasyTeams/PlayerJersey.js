@@ -9,7 +9,10 @@ export const PlayerJersey = (props) => {
     return (
         <div className={"player-jersey " + props.className}>
             <div className="remove-player-bar">
-                <FontAwesomeIcon icon={faTimes} />
+                {player ? <FontAwesomeIcon
+                    icon={faTimes}
+                    onClick={() => props.removePlayer(player.id)}
+                /> : ''}
             </div>
             <img className="w-100 jersey-img" src={jersey} />
             <div className="jersey-overlay">
@@ -24,7 +27,7 @@ export const PlayerJersey = (props) => {
                     <div className="team-name font-weight-bold">
                         {player ? player.team[0].abbreviation : '+'}
                     </div>
-                    <div className="player-position font-weight-bold">C</div>
+                    <div className="player-position font-weight-bold">{props.position}</div>
                 </div>
             </div>
         </div>
