@@ -32,7 +32,59 @@ class PlayersService {
                 }
             )
         }
+        if(orderBy) {
+            switch (orderBy) {
+                case 'name_desc':
+                    filteredPlayers = this.sortBy(
+                        'first_name',
+                        filteredPlayers
+                    );
+                    break;
+                case 'name_asc':
+                    filteredPlayers = this.sortBy(
+                        'first_name',
+                        filteredPlayers,
+                        false
+                    );
+                    break;
+                case 'credits_desc':
+                    filteredPlayers = this.sortBy(
+                        'fantasy_cost',
+                        filteredPlayers
+                    );
+                    break;
+                case 'credits_asc':
+                    filteredPlayers = this.sortBy(
+                        'fantasy_cost',
+                        filteredPlayers,
+                        false
+                    );
+                    break;
+            }
+        }
         return filteredPlayers;
+    }
+
+    sortBy(propertyName, items, asc = true) {
+        function compare( a, b ) {
+            let firstProp = a[propertyName];
+            let secondProp = b[propertyName];
+
+            if(propertyName.toLowerCase() === 'fantasy_cost') {
+                firstProp = parseFloat(firstProp);
+                secondProp = parseFloat(secondProp);
+            }
+
+            if ( firstProp < secondProp ){
+                return asc ? 1 : -1;
+            }
+            if ( firstProp > secondProp ){
+                return asc ? -1 : 1;
+            }
+            return 0;
+        }
+
+        return items.sort(compare);
     }
 }
 
