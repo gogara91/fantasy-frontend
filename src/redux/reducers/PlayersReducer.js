@@ -31,7 +31,13 @@ export const PlayersStore = (state = initialState, action) => {
         case actionTypes.SET_SORT_BY_FILTER:
             return {
                 ...state,
-                sortByFilter: action.payload
+                sortByFilter: action.payload,
+                filteredPayersWithTeam: PlayersService.filterPlayers(
+                    state.playersWithTeam,
+                    state.playerNameFilter,
+                    state.teamsFilter,
+                    action.payload
+                )
             };
         case actionTypes.SET_TEAMS_FILTER:
             return {

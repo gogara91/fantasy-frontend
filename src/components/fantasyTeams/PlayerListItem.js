@@ -10,7 +10,7 @@ export default(props) => {
     const {first_name, last_name, team, position, fantasy_cost, id} = props.player;
     const fantasyTeamId = useParams().id;
     const fantasyTeamPlayers = useSelector(state => state.FantasyTeamsStore.team.players);
-    const alreadySelectedPositions = fantasyTeamPlayers.map(player => player.player.position);
+    const alreadySelectedPositions = fantasyTeamPlayers.map(player => player.current_position);
 
     const addToFantasyTeam = () => {
         if(alreadySelectedPositions.includes(position)) {
@@ -53,7 +53,6 @@ export default(props) => {
                     <FontAwesomeIcon className="icon" icon={faPlus} />
                 </button>
             </div>
-
         </div>
     )
 }
