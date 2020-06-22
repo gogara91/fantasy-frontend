@@ -1,14 +1,19 @@
 import React, {Component} from "react";
 import CourtImg from '../../images/bbcourt.jpg';
 import {connect} from 'react-redux';
-import {handleFetchFantasyTeam, handleRemovePlayerFromFantasyTeam} from '../../redux/actions/fantasyTeamsActions';
+import {handleFetchFantasyTeam, handleReplacePlayers, handleRemovePlayerFromFantasyTeam} from '../../redux/actions/fantasyTeamsActions';
 import '../../css/EditTeamStyles.css';
 import {PlayerJersey} from "../../components/fantasyTeams/PlayerJersey";
 import PlayersListFilters from '../../components/fantasyTeams/PlayersListFilters';
 import PlayersList from '../../components/fantasyTeams/PlayersList';
 
 class EditFantasyTeam extends Component {
-
+    
+    state = {
+        draggedPlayer: '',
+        playerToBeDroppedOn: ''
+    }
+    
     componentDidMount() {
         this.props.fetchTeam(this.props.match.params.id);
     }
@@ -18,6 +23,30 @@ class EditFantasyTeam extends Component {
         this.props.removeFantasyPlayer(players, playerId);
     }
 
+    setDraggedPlayer(playerId) {
+        this.setState({
+            ...this.state,
+            draggedPlayer: playerId,
+        });
+    }
+    
+    setToBeDroppedOn(playerId) {
+        this.setState({
+            ...this.state,
+            playerToBeDroppedOn: playerId
+        });
+
+    }
+
+    replacePlayers() {
+        const teamId = this.props.match.params.id;
+        this.props.replacePlayers({
+            player_1: this.state.draggedPlayer,
+            player_2: this.state.playerToBeDroppedOn
+        }, teamId)
+
+    }
+    
     render() {
         const {players, total_budget, used_budget} = this.props.team;
         const center = players ? players.filter(player => player.current_position === 'C')[0] : '';
@@ -35,8 +64,11 @@ class EditFantasyTeam extends Component {
                     key={i}
                     className="bench-player-jersey"
                     playerInfo={player}
-                    removePlayer={(playerId) => this.removePlayer(playerId)}
                     position={player ? player.player.position : ''}
+                    removePlayer={(playerId) => this.removePlayer(playerId)}
+                    setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                    setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                    replacePlayers={() => this.replacePlayers()}
                 />
             )
         }
@@ -58,13 +90,19 @@ class EditFantasyTeam extends Component {
                                 <div className="frontcourt-container">
                                     <PlayerJersey
                                         playerInfo={center}
-                                        removePlayer={(playerId) => this.removePlayer(playerId)}
                                         position={'C'}
+                                        removePlayer={(playerId) => this.removePlayer(playerId)}
+                                        setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                                        setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                                        replacePlayers={() => this.replacePlayers()}
                                     />
                                     <PlayerJersey
                                         playerInfo={powerForward}
                                         position={'PF'}
                                         removePlayer={(playerId) => this.removePlayer(playerId)}
+                                        setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                                        setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                                        replacePlayers={() => this.replacePlayers()}
                                     />
                                 </div>
                                 <div className="midcourt-container">
@@ -72,11 +110,17 @@ class EditFantasyTeam extends Component {
                                         playerInfo={smallForward}
                                         position={'SF'}
                                         removePlayer={(playerId) => this.removePlayer(playerId)}
+                                        setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                                        setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                                        replacePlayers={() => this.replacePlayers()}
                                     />
                                     <PlayerJersey
                                         playerInfo={shootingGuard}
                                         position={'SG'}
                                         removePlayer={(playerId) => this.removePlayer(playerId)}
+                                        setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                                        setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                                        replacePlayers={() => this.replacePlayers()}
                                     />
                                 </div>
                                 <div className="backcourt-container">
@@ -84,6 +128,9 @@ class EditFantasyTeam extends Component {
                                         playerInfo={pointGuard}
                                         position={'PG'}
                                         removePlayer={(playerId) => this.removePlayer(playerId)}
+                                        setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
+                                        setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
+                                        replacePlayers={() => this.replacePlayers()}
                                     />
                                 </div>
                             </div>
@@ -111,7 +158,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchTeam: (teamId) => dispatch(handleFetchFantasyTeam(teamId)),
         removeFantasyPlayer: (players, playerId) =>
-            dispatch(handleRemovePlayerFromFantasyTeam(players, playerId))
+            dispatch(handleRemovePlayerFromFantasyTeam(players, playerId)),
+        replacePlayers: (players, teamId) => dispatch(handleReplacePlayers(players, teamId))
     }
 }
 

@@ -102,3 +102,7 @@
     overflow: hidden;
     font-size: 12px;
 }
+
+.player-jersey-dragged * {
+    pointer-events: none
+}

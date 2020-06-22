@@ -26,10 +26,8 @@ class EditTeam extends Component {
     handleClick = () => {
         try {
             this.props.saveTeam(this.props.match.params.id, this.props.team);
-            console.log(123);
         } catch(e) {
             console.log(e);
-
         }
     }
 

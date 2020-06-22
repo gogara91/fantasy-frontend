@@ -37,8 +37,15 @@ const handleAddPlayerToFantasyTeamDispatcher = (data) => {
 
 export const handleAddPlayerToFantasyTeam = (playerId, teamId) => {
     return async (dispatch) => {
-        const {data} = await FantasyTeamsService.addPlayer(playerId, teamId);
-        dispatch(handleAddPlayerToFantasyTeamDispatcher(data));
+        try {
+            const {data} = await FantasyTeamsService.addPlayer(playerId, teamId);
+            dispatch(handleAddPlayerToFantasyTeamDispatcher(data));
+        }
+        catch(e) {
+            if(e.response.data.error) {
+                alert(e.response.data.error)
+            }
+        }
     }
 }
 
@@ -62,6 +69,26 @@ export const handleRemovePlayerFromFantasyTeam = (players, playerId) => {
             }));
         } catch (e) {
             console.log(e);
+        }
+    }
+}
+
+const handleReplacePlayersDispatcher = (players) => {
+
+    return {
+        type: actionTypes.REPLACE_FANTASY_TEAM_PLAYERS,
+        payload: players
+    }
+}
+
+//Actually player ID-s.
+export const handleReplacePlayers = (players, teamId)  => {
+    return async (dispatch) => {
+        try {
+            const {data} = await FantasyTeamsService.replacePlayers(players, teamId)
+            dispatch(handleReplacePlayersDispatcher(data))
+        } catch(e) {
+            alert(e.response.data.error);
         }
     }
 }
