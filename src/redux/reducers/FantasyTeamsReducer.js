@@ -31,8 +31,16 @@ export const FantasyTeamsStore = (state= initialState, action) => {
                     players: [...state.team.players, action.payload.player]
                 }
             }
+        case actionTypes.REPLACE_FANTASY_TEAM_PLAYERS:
+            console.log(action.payload);
+            return {
+                ...state,
+                team: {
+                    ...state.team,
+                    players: [...action.payload]
+                }
+            }
         case actionTypes.REMOVE_FANTASY_PLAYER:
-            console.log(action.payload.players);
             return {
                 ...state,
                 team: {

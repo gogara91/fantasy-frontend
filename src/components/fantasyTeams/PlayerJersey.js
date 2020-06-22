@@ -1,13 +1,25 @@
 import React from "react";
 import jersey from '../../images/bbal-jersey.png';
-import PlayerJerseyStyles from '../../css/PlayerJersey.css'
+import  '../../css/PlayerJersey.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
 export const PlayerJersey = (props) => {
     const {player} = props.playerInfo ? props.playerInfo : false;
+
     return (
-        <div className={"player-jersey " + props.className}>
+        <div
+
+            className={"player-jersey " + props.className}
+            draggable={player ? true : false}
+            onDragStart={() => props.setDraggedPlayer(player.id)}
+            onDragEnter={() => props.setToBeDroppedOn(player ? player.id : '')}
+            onDragOver={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+            }}
+            onDrop={() => props.replacePlayers()}
+        >
             <div className="remove-player-bar">
                 {player ? <FontAwesomeIcon
                     icon={faTimes}
