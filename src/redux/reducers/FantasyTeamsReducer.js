@@ -32,7 +32,6 @@ export const FantasyTeamsStore = (state= initialState, action) => {
                 }
             }
         case actionTypes.REPLACE_FANTASY_TEAM_PLAYERS:
-            console.log(action.payload);
             return {
                 ...state,
                 team: {

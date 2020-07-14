@@ -27,7 +27,10 @@ export const PlayerJersey = (props) => {
                 /> : ''}
             </div>
             <img className="w-100 jersey-img" src={jersey} />
-            <div className="jersey-overlay">
+            <div
+                className="jersey-overlay"
+                onClick={() => props.onClick(player)}
+            >
                 <div className="player-name">
                     {player ? `${player.first_name.charAt(0)}. ${player.last_name}`: ''}
 

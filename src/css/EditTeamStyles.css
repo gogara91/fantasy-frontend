@@ -44,3 +44,70 @@
     display: flex;
     align-content: flex-start;
 }
+
+.player-info-modal-header {
+    background: #05085a;
+    color: #fff;
+}
+
+.player-info-modal-header button {
+    color: #fff;
+}
+
+.player-info-modal-header button:hover {
+    color: #fff;
+}
+.player-info-modal-header .modal-header {
+    border-bottom: 0px;
+}
+.player-info-modal-header .header-info {
+    background: #fff;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 10px;
+}
+.player-info-table-wrapper {
+    background:rgb(241, 241, 241);
+}
+.player-info-table {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgb(230, 231, 231);
+}
+
+.player-info-table thead {
+    background: #3d4459;
+    color: #fff;
+
+}
+
+.player-info-table thead tr td:first-child {
+    border-top-left-radius: 10px;
+}
+
+.player-info-table thead tr td:last-child {
+    border-top-right-radius: 10px;
+}
+
+.player-info-table tbody tr td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+.player-info-table tbody tr {
+    border-bottom: 1px solid rgb(230, 231, 231);
+}
+
+.player-info-table tbody tr:last-child {
+    border-bottom: 0px;
+}
+
+.team-nugget {
+    padding: 5px;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    font-size:14px;
+    border-radius: 3px;
+
+}

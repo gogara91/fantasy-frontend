@@ -6,7 +6,7 @@ function PrimaryButton(props) {
     return(
         <>
             <button
-                className={`btn btn-outline-${color} btn-sm ${props.className}`}
+                className={`btn btn-${color} btn-sm ${props.className}`}
                 onClick={() => props.onClick()}
             >
                 {props.children}
