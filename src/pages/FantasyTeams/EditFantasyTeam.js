@@ -6,12 +6,14 @@ import '../../css/EditTeamStyles.css';
 import {PlayerJersey} from "../../components/fantasyTeams/PlayerJersey";
 import PlayersListFilters from '../../components/fantasyTeams/PlayersListFilters';
 import PlayersList from '../../components/fantasyTeams/PlayersList';
-
+import PlayerInfoModal from "../../components/fantasyTeams/PlayerInfoModal";
 class EditFantasyTeam extends Component {
     
     state = {
         draggedPlayer: '',
-        playerToBeDroppedOn: ''
+        playerToBeDroppedOn: '',
+        showPlayerInfoModal: false,
+        playerInfo: {}
     }
     
     componentDidMount() {
@@ -21,6 +23,10 @@ class EditFantasyTeam extends Component {
     removePlayer(playerId) {
         const players = this.props.team.players;
         this.props.removeFantasyPlayer(players, playerId);
+    }
+
+    hidePlayerInfoModal() {
+        this.setState({...this.state, showPlayerInfoModal: false})
     }
 
     setDraggedPlayer(playerId) {
@@ -46,7 +52,14 @@ class EditFantasyTeam extends Component {
         }, teamId)
 
     }
-    
+    showPlayerInfo(player) {
+        this.setState({
+            ...this.state,
+            showPlayerInfoModal: true,
+            playerInfo: player
+        })
+    }
+
     render() {
         const {players, total_budget, used_budget} = this.props.team;
         const center = players ? players.filter(player => player.current_position === 'C')[0] : '';
@@ -69,6 +82,7 @@ class EditFantasyTeam extends Component {
                     setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                     setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                     replacePlayers={() => this.replacePlayers()}
+                    onClick={(player) => this.showPlayerInfo(player)}
                 />
             )
         }
@@ -95,6 +109,7 @@ class EditFantasyTeam extends Component {
                                         setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                                         setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                                         replacePlayers={() => this.replacePlayers()}
+                                        onClick={(player) => this.showPlayerInfo(player)}
                                     />
                                     <PlayerJersey
                                         playerInfo={powerForward}
@@ -103,7 +118,8 @@ class EditFantasyTeam extends Component {
                                         setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                                         setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                                         replacePlayers={() => this.replacePlayers()}
-                                    />
+                                        onClick={(player) => this.showPlayerInfo(player)}
+                                        />
                                 </div>
                                 <div className="midcourt-container">
                                     <PlayerJersey
@@ -113,6 +129,7 @@ class EditFantasyTeam extends Component {
                                         setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                                         setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                                         replacePlayers={() => this.replacePlayers()}
+                                        onClick={(player) => this.showPlayerInfo(player)}
                                     />
                                     <PlayerJersey
                                         playerInfo={shootingGuard}
@@ -121,6 +138,7 @@ class EditFantasyTeam extends Component {
                                         setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                                         setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                                         replacePlayers={() => this.replacePlayers()}
+                                        onClick={(player) => this.showPlayerInfo(player)}
                                     />
                                 </div>
                                 <div className="backcourt-container">
@@ -131,6 +149,7 @@ class EditFantasyTeam extends Component {
                                         setDraggedPlayer={(id)=> this.setDraggedPlayer(id)}
                                         setToBeDroppedOn={(id)=> this.setToBeDroppedOn(id)}
                                         replacePlayers={() => this.replacePlayers()}
+                                        onClick={(player) => this.showPlayerInfo(player)}
                                     />
                                 </div>
                             </div>
@@ -144,6 +163,11 @@ class EditFantasyTeam extends Component {
                         </div>
                     </div>
                 </div>
+                <PlayerInfoModal
+                    hideModal={() => this.hidePlayerInfoModal()}
+                    showModal={this.state.showPlayerInfoModal}
+                    player={this.state.playerInfo}
+                />
             </>
         )
     }

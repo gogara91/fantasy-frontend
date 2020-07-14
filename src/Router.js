@@ -10,7 +10,6 @@ import Teams from './pages/Teams/Teams';
 import Team from './pages/Teams/Team';
 import EditTeam from './pages/Teams/EditTeam';
 import StartGamePanel from './pages/Games/StartGamePanel'
-// import Players from './pages/Players';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Logout from './pages/auth/Logout';
@@ -23,6 +22,7 @@ import {connect} from 'react-redux';
 import {Row} from 'react-bootstrap';
 import UserHomePage from "./pages/Home/UserHomePage";
 import EditFantasyTeam from "./pages/FantasyTeams/EditFantasyTeam";
+
 class Routing extends Component {
     render() {
         const adminRoutes =  !this.props.isAdmin ? '' :

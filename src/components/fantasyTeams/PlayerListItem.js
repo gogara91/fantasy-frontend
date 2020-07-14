@@ -4,6 +4,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {handleAddPlayerToFantasyTeam} from "../../redux/actions/fantasyTeamsActions";
 import { useParams } from 'react-router-dom'
+import PlayerInfoNugget from "./PlayerInfoNugget";
 
 export default(props) => {
     const dispatch = useDispatch();
@@ -23,16 +24,7 @@ export default(props) => {
 
     return (
         <div className="player-list-item">
-            <div className="team-position-nugget-wrapper">
-                <div className="nugget">
-                    <div className="nugget-up">
-                        {team[0].abbreviation}
-                    </div>
-                    <div className="nugget-down">
-                        {position}
-                    </div>
-                </div>
-            </div>
+            <PlayerInfoNugget teamAbbreviation={team[0].abbreviation} position={position}/>
             <div className="player-list-info-wrapper">
                 <div className="player-list-name">
                     <b>{last_name.toUpperCase()}</b> {first_name.toUpperCase()}
